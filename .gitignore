@@ -1,0 +1,23 @@
+# 環境変数（APIキー、パスワード）
+.env
+
+# 出力データ（リード情報、メール下書き等）
+output/leads/
+output/emails/
+output/logs/
+output/extractions/
+output/pipeline.csv
+
+# melta-ui（デザインシステム、サイズが大きい）
+foundations/
+components/
+patterns/
+tokens/
+metadata/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/

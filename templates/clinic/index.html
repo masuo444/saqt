@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{CLINIC_NAME}} | {{DEPT_1}}・{{DEPT_2}}・{{DEPT_3}} | {{ADDRESS}}</title>
+  <meta name="description" content="{{CLINIC_NAME}} — {{DESCRIPTION}}">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+  // ===== THEME COLOR CONFIG =====
+  // To override primary color, replace the primary palette below.
+  // Default clinic theme: #0891b2 (teal/cyan)
+  // {{THEME_COLOR}} — replace primary values programmatically
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: {
+            50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',
+            400:'#22d3ee',500:'#0891b2',600:'#0e7490',700:'#155e75',
+            800:'#164e63',900:'#134152',950:'#0a2e3b'
+          },
+          wf: { bg:'#FFFFFF', surface:'#F5F5F5', border:'#E0E0E0', text:'#333333', 'text-sub':'#888888', accent:'#666666' }
+        },
+        fontFamily: {
+          sans: ['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']
+        }
+      }
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 min-h-screen text-[#3d4b5f] leading-relaxed">
+
+  <!-- ====== HEADER ====== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm transition-shadow duration-200">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="#" class="flex items-center gap-2 text-slate-900 font-semibold text-lg no-underline" aria-label="{{CLINIC_NAME}} トップページ">
+        <span class="w-8 h-8 bg-primary-500 text-white rounded-lg inline-flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 10h-4v4h-4v-4H6v-4h4V5h4v4h4v4z"/></svg>
+        </span>
+        {{CLINIC_NAME}}
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8" aria-label="メインナビゲーション">
+        <a href="#features" class="text-sm font-medium text-[#3d4b5f] hover:text-primary-500 transition-colors duration-200 no-underline">当院について</a>
+        <a href="#departments" class="text-sm font-medium text-[#3d4b5f] hover:text-primary-500 transition-colors duration-200 no-underline">診療案内</a>
+        <a href="#doctor" class="text-sm font-medium text-[#3d4b5f] hover:text-primary-500 transition-colors duration-200 no-underline">院長紹介</a>
+        <a href="#schedule" class="text-sm font-medium text-[#3d4b5f] hover:text-primary-500 transition-colors duration-200 no-underline">診療時間</a>
+        <a href="#access" class="text-sm font-medium text-[#3d4b5f] hover:text-primary-500 transition-colors duration-200 no-underline">アクセス</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="tel:{{PHONE}}" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-900 no-underline">
+          <svg class="w-4 h-4 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {{PHONE}}
+        </a>
+        <a href="#contact" class="inline-flex items-center justify-center h-10 px-4 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200 no-underline">ご予約</a>
+      </div>
+
+      <button id="hamburger" class="lg:hidden w-10 h-10 inline-flex flex-col items-center justify-center gap-1.5 cursor-pointer" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="hamburger-line block w-5 h-0.5 bg-slate-900 transition-all duration-200 origin-center"></span>
+        <span class="hamburger-line block w-5 h-0.5 bg-slate-900 transition-all duration-200 origin-center"></span>
+        <span class="hamburger-line block w-5 h-0.5 bg-slate-900 transition-all duration-200 origin-center"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobile-nav" class="mobile-nav lg:hidden fixed inset-0 top-16 bg-white z-40 transform translate-x-full transition-transform duration-300 overflow-y-auto" aria-label="モバイルナビゲーション">
+      <div class="px-6 py-8 flex flex-col gap-2">
+        <a href="#features" class="mobile-nav-link block py-3 px-4 text-base font-medium text-slate-900 hover:bg-gray-50 rounded-lg no-underline transition-colors duration-200">当院について</a>
+        <a href="#departments" class="mobile-nav-link block py-3 px-4 text-base font-medium text-slate-900 hover:bg-gray-50 rounded-lg no-underline transition-colors duration-200">診療案内</a>
+        <a href="#doctor" class="mobile-nav-link block py-3 px-4 text-base font-medium text-slate-900 hover:bg-gray-50 rounded-lg no-underline transition-colors duration-200">院長紹介</a>
+        <a href="#schedule" class="mobile-nav-link block py-3 px-4 text-base font-medium text-slate-900 hover:bg-gray-50 rounded-lg no-underline transition-colors duration-200">診療時間</a>
+        <a href="#access" class="mobile-nav-link block py-3 px-4 text-base font-medium text-slate-900 hover:bg-gray-50 rounded-lg no-underline transition-colors duration-200">アクセス</a>
+        <hr class="border-t border-slate-200 my-2" role="separator">
+        <a href="#contact" class="inline-flex items-center justify-center h-12 px-6 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200 no-underline">Web予約</a>
+        <a href="tel:{{PHONE}}" class="mobile-nav-link inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium bg-white text-slate-700 border border-slate-200 rounded-lg no-underline">
+          <svg class="w-4 h-4 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {{PHONE}}
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section class="pt-28 pb-16 md:pt-36 md:pb-24 bg-white">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <div class="fade-in">
+        <p class="inline-flex items-center gap-2 text-sm font-medium text-primary-500 mb-4">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          {{DEPT_1}} / {{DEPT_2}} / {{DEPT_3}} / {{DEPT_4}}
+        </p>
+      </div>
+
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-4 fade-in">{{CLINIC_NAME}}</h1>
+      <p class="text-base text-[#3d4b5f] leading-relaxed max-w-2xl mx-auto mb-8 fade-in">{{DESCRIPTION}}</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 fade-in">
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200 no-underline">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Web予約はこちら
+        </a>
+        <a href="tel:{{PHONE}}" class="inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium bg-white text-slate-700 border border-slate-200 rounded-lg hover:bg-gray-50 transition-colors duration-200 no-underline">
+          <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>
+            <span class="font-semibold text-slate-900">{{PHONE}}</span>
+            <span class="block text-xs text-slate-500">受付時間 {{HOURS}}</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Info bar -->
+      <div class="inline-flex flex-col sm:flex-row items-stretch bg-white rounded-xl border border-slate-200 shadow-sm divide-y sm:divide-y-0 sm:divide-x divide-slate-200 fade-in">
+        <div class="flex items-center gap-3 px-6 py-4">
+          <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 inline-flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="text-left">
+            <p class="text-xs font-medium text-slate-500">診療時間</p>
+            <p class="text-sm font-semibold text-slate-900">{{HOURS}}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 px-6 py-4">
+          <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 inline-flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="text-left">
+            <p class="text-xs font-medium text-slate-500">休診日</p>
+            <p class="text-sm font-semibold text-slate-900">{{HOLIDAY}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FEATURES ====== -->
+  <section id="features" class="py-16 md:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-medium text-primary-500 tracking-wider uppercase mb-2 fade-in">Our Features</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3 fade-in">当院の特徴</h2>
+        <p class="text-base text-[#3d4b5f] fade-in">患者さまに安心して通っていただけるよう、<br class="hidden sm:inline">3つのことを大切にしています。</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-12 h-12 rounded-xl bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-5 mx-auto">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">痛みに配慮した治療</h3>
+          <p class="text-sm text-[#3d4b5f] leading-relaxed">できるだけ痛みを抑えた治療を心がけています。不安な点は遠慮なくご相談ください。患者さまの負担を最小限にすることを第一に考えています。</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-12 h-12 rounded-xl bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-5 mx-auto">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">丁寧でわかりやすい説明</h3>
+          <p class="text-sm text-[#3d4b5f] leading-relaxed">症状や治療法について、わかりやすい言葉で丁寧にご説明いたします。ご納得いただいた上で治療を進めますのでご安心ください。</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-12 h-12 rounded-xl bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-5 mx-auto">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">清潔で快適な院内環境</h3>
+          <p class="text-sm text-[#3d4b5f] leading-relaxed">衛生管理を徹底し、患者さまに気持ちよくお過ごしいただける環境を整えています。バリアフリー設計でどなたでも安心してご来院いただけます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DEPARTMENTS ====== -->
+  <section id="departments" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-medium text-primary-500 tracking-wider uppercase mb-2 fade-in">Medical Services</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3 fade-in">診療案内</h2>
+        <p class="text-base text-[#3d4b5f] fade-in">以下の診療科にて、幅広い症状に対応しております。</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Dept 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-1">{{DEPT_1}}</h3>
+          <p class="text-sm text-[#3d4b5f]">幅広い症状に対応し、<br>総合的な診療を行います。</p>
+        </div>
+
+        <!-- Dept 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-1">{{DEPT_2}}</h3>
+          <p class="text-sm text-[#3d4b5f]">お子さまの健やかな成長を<br>サポートいたします。</p>
+        </div>
+
+        <!-- Dept 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-1">{{DEPT_3}}</h3>
+          <p class="text-sm text-[#3d4b5f]">皮膚のお悩みに<br>的確に対応いたします。</p>
+        </div>
+
+        <!-- Dept 4 -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 text-center fade-in">
+          <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 inline-flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-1">{{DEPT_4}}</h3>
+          <p class="text-sm text-[#3d4b5f]">アレルギー症状の検査・<br>治療を行います。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DOCTOR ====== -->
+  <section id="doctor" class="py-16 md:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-medium text-primary-500 tracking-wider uppercase mb-2 fade-in">Doctor</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 fade-in">院長紹介</h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto fade-in">
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="grid md:grid-cols-5 gap-0">
+            <!-- Photo placeholder -->
+            <div class="md:col-span-2 bg-gray-100 flex flex-col items-center justify-center py-16 md:py-0 text-slate-400">
+              <svg class="w-16 h-16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <span class="text-sm mt-2">院長写真</span>
+            </div>
+
+            <!-- Profile -->
+            <div class="md:col-span-3 p-6 md:p-8">
+              <p class="text-xs font-medium text-primary-500 uppercase tracking-wider mb-1">院長</p>
+              <h3 class="text-xl font-bold text-slate-900 mb-1">{{DOCTOR_NAME}}</h3>
+              <p class="text-sm text-slate-500 mb-6">{{DOCTOR_TITLE}}</p>
+
+              <p class="text-sm text-[#3d4b5f] leading-relaxed mb-6">
+                {{CLINIC_NAME}}のホームページをご覧いただき、ありがとうございます。<br><br>
+                当院では、患者さま一人ひとりに寄り添った丁寧な診療を心がけております。
+                症状だけでなく、生活背景やご不安なども含めてお話をうかがい、
+                最適な治療をご提案いたします。<br><br>
+                お身体のことで少しでも気になることがございましたら、
+                どうぞお気軽にご相談ください。
+                地域のかかりつけ医として、皆さまの健康を全力でサポートしてまいります。
+              </p>
+
+              <div>
+                <p class="text-sm font-semibold text-slate-900 mb-2">経歴・資格</p>
+                <ul class="space-y-1.5">
+                  <li class="flex items-center gap-2 text-sm text-[#3d4b5f]">
+                    <span class="w-1 h-1 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+                    {{DOCTOR_TITLE}}
+                  </li>
+                  <li class="flex items-center gap-2 text-sm text-[#3d4b5f]">
+                    <span class="w-1 h-1 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+                    日本医師会認定産業医
+                  </li>
+                  <li class="flex items-center gap-2 text-sm text-[#3d4b5f]">
+                    <span class="w-1 h-1 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+                    難病指定医
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SCHEDULE ====== -->
+  <section id="schedule" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-medium text-primary-500 tracking-wider uppercase mb-2 fade-in">Schedule</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 fade-in">診療時間</h2>
+      </div>
+
+      <div class="max-w-2xl mx-auto fade-in">
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="schedule-table w-full">
+              <thead>
+                <tr class="border-b border-slate-200 bg-gray-50">
+                  <th scope="col" class="text-left py-3 px-4 text-xs font-medium text-slate-500 uppercase tracking-wider"></th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">月</th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">火</th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">水</th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">木</th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">金</th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">土</th>
+                  <th scope="col" class="py-3 px-3 text-xs font-medium text-slate-500">日祝</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-slate-200">
+                  <td class="py-3 px-4 text-sm font-medium text-slate-900 whitespace-nowrap">午前 9:00〜12:30</td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-slate-300"><span aria-label="休診">−</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-amber-500 font-medium"><span aria-label="午前のみ">△</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-slate-300"><span aria-label="休診">−</span></td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-sm font-medium text-slate-900 whitespace-nowrap">午後 15:00〜18:30</td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-slate-300"><span aria-label="休診">−</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-primary-500 font-medium"><span aria-label="診療あり">○</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-slate-300"><span aria-label="休診">−</span></td>
+                  <td class="py-3 px-3 text-center text-sm text-slate-300"><span aria-label="休診">−</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="px-4 py-3 bg-gray-50 border-t border-slate-200 flex flex-wrap gap-4 text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1"><span class="text-primary-500 font-medium">○</span> 診療</span>
+            <span class="inline-flex items-center gap-1"><span class="text-amber-500 font-medium">△</span> 午前のみ（12:00まで）</span>
+            <span class="inline-flex items-center gap-1"><span class="text-slate-300">−</span> 休診</span>
+          </div>
+        </div>
+
+        <p class="mt-4 text-sm text-[#3d4b5f] text-center">
+          <span class="font-medium text-slate-900">休診日：</span>{{HOLIDAY}}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ACCESS ====== -->
+  <section id="access" class="py-16 md:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-medium text-primary-500 tracking-wider uppercase mb-2 fade-in">Access</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 fade-in">アクセス</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 fade-in">
+        <!-- Info -->
+        <div>
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-5 mb-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gray-50 text-slate-500 inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-slate-500 mb-0.5">住所</p>
+                <p class="text-sm text-slate-900">{{ADDRESS}}</p>
+              </div>
+            </div>
+
+            <hr class="border-t border-slate-200" role="separator">
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gray-50 text-slate-500 inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-slate-500 mb-0.5">電話番号</p>
+                <p class="text-sm text-slate-900"><a href="tel:{{PHONE}}" class="text-slate-900 no-underline hover:text-primary-500 transition-colors duration-200">{{PHONE}}</a></p>
+              </div>
+            </div>
+
+            <hr class="border-t border-slate-200" role="separator">
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gray-50 text-slate-500 inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-slate-500 mb-0.5">診療時間</p>
+                <p class="text-sm text-slate-900">{{HOURS}}</p>
+              </div>
+            </div>
+
+            <hr class="border-t border-slate-200" role="separator">
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gray-50 text-slate-500 inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-slate-500 mb-0.5">休診日</p>
+                <p class="text-sm text-slate-900">{{HOLIDAY}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm text-[#3d4b5f]">
+            <svg class="w-5 h-5 text-slate-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"/><path d="M16 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            駐車場あり（医院前に専用駐車場をご用意しております）
+          </div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="fade-in">
+          <div class="bg-gray-100 rounded-xl aspect-[4/3] lg:aspect-auto lg:h-full min-h-[300px] flex flex-col items-center justify-center text-slate-500" aria-label="地図">
+            <svg class="w-10 h-10 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-sm">Google Maps がここに表示されます</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section id="contact" class="py-16 md:py-24 bg-primary-500">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center fade-in">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">ご予約・お問い合わせ</h2>
+      <p class="text-base text-primary-100 leading-relaxed mb-8">ご来院の際はお電話またはWebからご予約いただけます。<br class="hidden sm:inline">お気軽にお問い合わせください。</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <a href="#" class="inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium bg-white text-primary-500 rounded-lg hover:bg-primary-50 transition-colors duration-200 no-underline">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Web予約はこちら
+        </a>
+        <a href="tel:{{PHONE}}" class="inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium text-white border border-white/30 rounded-lg hover:bg-white/10 transition-colors duration-200 no-underline">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>
+            {{PHONE}}
+            <span class="block text-xs text-primary-100">受付時間 {{HOURS}}</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="bg-slate-900 text-slate-300 py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-10 mb-10">
+        <!-- Brand -->
+        <div>
+          <p class="text-lg font-semibold text-white mb-3">{{CLINIC_NAME}}</p>
+          <div class="text-sm text-slate-400 leading-relaxed space-y-1">
+            <p>{{ADDRESS}}</p>
+            <p>TEL: {{PHONE}}</p>
+            <p>{{DEPT_1}} / {{DEPT_2}} / {{DEPT_3}} / {{DEPT_4}}</p>
+          </div>
+        </div>
+
+        <!-- Departments -->
+        <div>
+          <p class="text-sm font-semibold text-white mb-4">診療案内</p>
+          <div class="flex flex-col gap-2">
+            <a href="#departments" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">{{DEPT_1}}</a>
+            <a href="#departments" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">{{DEPT_2}}</a>
+            <a href="#departments" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">{{DEPT_3}}</a>
+            <a href="#departments" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">{{DEPT_4}}</a>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <p class="text-sm font-semibold text-white mb-4">ご案内</p>
+          <div class="flex flex-col gap-2">
+            <a href="#features" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">当院について</a>
+            <a href="#doctor" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">院長紹介</a>
+            <a href="#schedule" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">診療時間</a>
+            <a href="#access" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">アクセス</a>
+            <a href="#contact" class="text-sm text-slate-400 hover:text-white transition-colors duration-200 no-underline">ご予約</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="border-t border-slate-700 mb-6" role="separator">
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <span>&copy; {{YEAR}} {{CLINIC_NAME}} All Rights Reserved.</span>
+        <span>Demo site created by SAQT</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== SCRIPTS ====== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* Hamburger menu */
+      var btn = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var links = mobileNav.querySelectorAll('.mobile-nav-link');
+
+      function toggle(open) {
+        var isOpen = typeof open === 'boolean' ? open : !mobileNav.classList.contains('is-open');
+        mobileNav.classList.toggle('is-open', isOpen);
+        btn.classList.toggle('is-active', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      btn.addEventListener('click', function () { toggle(); });
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () { toggle(false); });
+      }
+
+      /* Header scroll shadow */
+      var header = document.getElementById('header');
+      var lastY = 0;
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        if ((y > 10) !== (lastY > 10)) {
+          header.classList.toggle('is-scrolled', y > 10);
+        }
+        lastY = y;
+      }, { passive: true });
+
+      /* Scroll reveal via IntersectionObserver */
+      var els = document.querySelectorAll('.fade-in');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { observer.observe(el); });
+
+      /* Smooth scroll for anchor links */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = this.getAttribute('href');
+          if (id === '#') return;
+          var target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAQT チャットボット管理画面</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="container">
+            <h1>SAQT チャットボット管理</h1>
+            <p>ナレッジベースの編集・管理</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ダッシュボード -->
+        <section class="dashboard">
+            <div class="stat-card">
+                <div class="stat-number" id="stat-total">0</div>
+                <div class="stat-label">Q&A エントリ数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-categories">0</div>
+                <div class="stat-label">カテゴリ数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-keywords">0</div>
+                <div class="stat-label">キーワード数</div>
+            </div>
+        </section>
+
+        <!-- 設定 -->
+        <section class="card">
+            <h2>基本設定</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>ボット名</label>
+                    <input type="text" id="setting-bot-name" placeholder="サポートアシスタント">
+                </div>
+                <div class="form-group">
+                    <label>挨拶メッセージ</label>
+                    <input type="text" id="setting-greeting" placeholder="こんにちは！お気軽にご質問ください。">
+                </div>
+                <div class="form-group full-width">
+                    <label>回答が見つからない時のメッセージ</label>
+                    <textarea id="setting-fallback" rows="2" placeholder="申し訳ございません。お問い合わせフォームからご連絡ください。"></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <label>クイック返信ボタン（カンマ区切り）</label>
+                    <input type="text" id="setting-quick-replies" placeholder="営業時間について, 料金について, 予約したい">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveSettings()">設定を保存</button>
+        </section>
+
+        <!-- アクションバー -->
+        <section class="action-bar">
+            <div class="action-left">
+                <button class="btn btn-primary" onclick="showAddForm()">+ 新しいQ&Aを追加</button>
+                <input type="text" id="search-input" class="search-input" placeholder="キーワードで検索..." oninput="filterEntries()">
+            </div>
+            <div class="action-right">
+                <button class="btn btn-outline" onclick="importJSON()">インポート</button>
+                <button class="btn btn-outline" onclick="exportJSON()">エクスポート</button>
+                <button class="btn btn-ghost" onclick="openPreview()">プレビュー</button>
+            </div>
+        </section>
+
+        <!-- 追加/編集フォーム -->
+        <section class="card form-card" id="entry-form" style="display:none;">
+            <h2 id="form-title">新しいQ&Aを追加</h2>
+            <input type="hidden" id="edit-id" value="">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>カテゴリ</label>
+                    <input type="text" id="entry-category" placeholder="例: 基本情報" list="category-list">
+                    <datalist id="category-list"></datalist>
+                </div>
+                <div class="form-group">
+                    <label>キーワード（カンマ区切り）</label>
+                    <input type="text" id="entry-keywords" placeholder="例: 営業時間, 開店, 閉店, 何時">
+                </div>
+                <div class="form-group full-width">
+                    <label>質問例（改行区切り）</label>
+                    <textarea id="entry-questions" rows="3" placeholder="営業時間を教えてください&#10;何時から何時までですか？"></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <label>回答</label>
+                    <textarea id="entry-answer" rows="4" placeholder="営業時間は9:00〜18:00です。&#10;土日祝日はお休みです。"></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="saveEntry()">保存</button>
+                <button class="btn btn-ghost" onclick="hideAddForm()">キャンセル</button>
+            </div>
+        </section>
+
+        <!-- エントリ一覧 -->
+        <section id="entries-list"></section>
+
+        <!-- インポート用 hidden input -->
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
+    </main>
+
+    <!-- プレビューモーダル -->
+    <div class="modal-overlay" id="preview-modal" style="display:none;" onclick="closePreview(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>チャットボット プレビュー</h3>
+                <button class="modal-close" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="preview-frame" id="preview-frame">
+                <div class="preview-chat-header">
+                    <div class="preview-avatar">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <span id="preview-bot-name">サポートアシスタント</span>
+                </div>
+                <div class="preview-messages" id="preview-messages"></div>
+                <div class="preview-input-area">
+                    <input type="text" id="preview-input" placeholder="テストメッセージを入力..." onkeydown="if(event.key==='Enter'&&!event.isComposing)previewSend()">
+                    <button onclick="previewSend()">送信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // --- データストア ---
+    let data = { settings: {}, entries: [] };
+
+    // 初期化
+    function init() {
+        const saved = localStorage.getItem('saqt-chatbot-data');
+        if (saved) {
+            try { data = JSON.parse(saved); } catch(e) {}
+        }
+        if (!data.settings) data.settings = {};
+        if (!data.entries) data.entries = [];
+        renderSettings();
+        renderEntries();
+        updateStats();
+    }
+
+    function persist() {
+        localStorage.setItem('saqt-chatbot-data', JSON.stringify(data));
+        updateStats();
+    }
+
+    // --- 設定 ---
+    function renderSettings() {
+        document.getElementById('setting-bot-name').value = data.settings.bot_name || '';
+        document.getElementById('setting-greeting').value = data.settings.greeting || '';
+        document.getElementById('setting-fallback').value = data.settings.fallback || '';
+        document.getElementById('setting-quick-replies').value = (data.settings.quick_replies || []).join(', ');
+    }
+
+    function saveSettings() {
+        data.settings.bot_name = document.getElementById('setting-bot-name').value.trim();
+        data.settings.greeting = document.getElementById('setting-greeting').value.trim();
+        data.settings.fallback = document.getElementById('setting-fallback').value.trim();
+        data.settings.quick_replies = document.getElementById('setting-quick-replies').value
+            .split(',').map(s => s.trim()).filter(Boolean);
+        persist();
+        showToast('設定を保存しました');
+    }
+
+    // --- エントリ管理 ---
+    function showAddForm() {
+        document.getElementById('form-title').textContent = '新しいQ&Aを追加';
+        document.getElementById('edit-id').value = '';
+        document.getElementById('entry-category').value = '';
+        document.getElementById('entry-keywords').value = '';
+        document.getElementById('entry-questions').value = '';
+        document.getElementById('entry-answer').value = '';
+        document.getElementById('entry-form').style.display = '';
+        updateCategoryList();
+        document.getElementById('entry-category').focus();
+    }
+
+    function hideAddForm() {
+        document.getElementById('entry-form').style.display = 'none';
+    }
+
+    function editEntry(id) {
+        const entry = data.entries.find(e => e.id === id);
+        if (!entry) return;
+        document.getElementById('form-title').textContent = 'Q&Aを編集';
+        document.getElementById('edit-id').value = id;
+        document.getElementById('entry-category').value = entry.category || '';
+        document.getElementById('entry-keywords').value = (entry.keywords || []).join(', ');
+        document.getElementById('entry-questions').value = (entry.questions || []).join('\n');
+        document.getElementById('entry-answer').value = entry.answer || '';
+        document.getElementById('entry-form').style.display = '';
+        updateCategoryList();
+        document.getElementById('entry-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function saveEntry() {
+        const editId = document.getElementById('edit-id').value;
+        const category = document.getElementById('entry-category').value.trim();
+        const keywords = document.getElementById('entry-keywords').value.split(',').map(s => s.trim()).filter(Boolean);
+        const questions = document.getElementById('entry-questions').value.split('\n').map(s => s.trim()).filter(Boolean);
+        const answer = document.getElementById('entry-answer').value.trim();
+
+        if (!answer) {
+            alert('回答を入力してください');
+            return;
+        }
+
+        if (editId) {
+            const entry = data.entries.find(e => e.id === editId);
+            if (entry) {
+                entry.category = category;
+                entry.keywords = keywords;
+                entry.questions = questions;
+                entry.answer = answer;
+            }
+        } else {
+            const newId = String(Date.now());
+            data.entries.push({ id: newId, category, keywords, questions, answer });
+        }
+
+        persist();
+        renderEntries();
+        hideAddForm();
+        showToast(editId ? '更新しました' : '追加しました');
+    }
+
+    function deleteEntry(id) {
+        if (!confirm('このQ&Aを削除しますか？')) return;
+        data.entries = data.entries.filter(e => e.id !== id);
+        persist();
+        renderEntries();
+        showToast('削除しました');
+    }
+
+    function renderEntries() {
+        const container = document.getElementById('entries-list');
+        const filter = (document.getElementById('search-input')?.value || '').toLowerCase();
+
+        let filtered = data.entries;
+        if (filter) {
+            filtered = filtered.filter(e =>
+                (e.category || '').toLowerCase().includes(filter) ||
+                (e.keywords || []).some(k => k.toLowerCase().includes(filter)) ||
+                (e.questions || []).some(q => q.toLowerCase().includes(filter)) ||
+                (e.answer || '').toLowerCase().includes(filter)
+            );
+        }
+
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="empty-state">Q&Aエントリがありません。「+ 新しいQ&Aを追加」ボタンから追加してください。</div>';
+            return;
+        }
+
+        // カテゴリ別にグルーピング
+        const groups = {};
+        for (const entry of filtered) {
+            const cat = entry.category || 'その他';
+            if (!groups[cat]) groups[cat] = [];
+            groups[cat].push(entry);
+        }
+
+        let html = '';
+        for (const [cat, entries] of Object.entries(groups)) {
+            html += `<div class="category-group"><h3 class="category-title">${escapeHtml(cat)} <span class="category-count">${entries.length}</span></h3>`;
+            for (const entry of entries) {
+                const kwHtml = (entry.keywords || []).map(k => `<span class="tag">${escapeHtml(k)}</span>`).join('');
+                const qHtml = (entry.questions || []).map(q => `<div class="question-example">${escapeHtml(q)}</div>`).join('');
+                html += `
+                <div class="entry-card">
+                    <div class="entry-body">
+                        <div class="entry-keywords">${kwHtml || '<span class="tag tag-empty">キーワードなし</span>'}</div>
+                        <div class="entry-questions">${qHtml || ''}</div>
+                        <div class="entry-answer">${escapeHtml(entry.answer)}</div>
+                    </div>
+                    <div class="entry-actions">
+                        <button class="btn-icon" onclick="editEntry('${entry.id}')" title="編集">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="btn-icon btn-danger" onclick="deleteEntry('${entry.id}')" title="削除">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>`;
+            }
+            html += '</div>';
+        }
+        container.innerHTML = html;
+    }
+
+    function filterEntries() { renderEntries(); }
+
+    function updateCategoryList() {
+        const cats = [...new Set(data.entries.map(e => e.category).filter(Boolean))];
+        const dl = document.getElementById('category-list');
+        dl.innerHTML = cats.map(c => `<option value="${escapeHtml(c)}">`).join('');
+    }
+
+    // --- 統計 ---
+    function updateStats() {
+        document.getElementById('stat-total').textContent = data.entries.length;
+        const cats = new Set(data.entries.map(e => e.category).filter(Boolean));
+        document.getElementById('stat-categories').textContent = cats.size;
+        const kwCount = data.entries.reduce((sum, e) => sum + (e.keywords || []).length, 0);
+        document.getElementById('stat-keywords').textContent = kwCount;
+    }
+
+    // --- インポート/エクスポート ---
+    function exportJSON() {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'knowledge.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('knowledge.json をダウンロードしました');
+    }
+
+    function importJSON() {
+        document.getElementById('import-file').click();
+    }
+
+    function handleImport(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const imported = JSON.parse(e.target.result);
+                if (imported.settings) data.settings = imported.settings;
+                if (imported.entries) data.entries = imported.entries;
+                persist();
+                renderSettings();
+                renderEntries();
+                showToast('インポートしました');
+            } catch(err) {
+                alert('JSONファイルの読み込みに失敗しました: ' + err.message);
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+    }
+
+    // --- プレビュー ---
+    function openPreview() {
+        document.getElementById('preview-modal').style.display = 'flex';
+        document.getElementById('preview-bot-name').textContent = data.settings.bot_name || 'サポートアシスタント';
+        const msgs = document.getElementById('preview-messages');
+        msgs.innerHTML = '';
+        addPreviewMsg('bot', data.settings.greeting || 'こんにちは！');
+    }
+
+    function closePreview(e) {
+        if (e && e.target !== document.getElementById('preview-modal')) return;
+        document.getElementById('preview-modal').style.display = 'none';
+    }
+
+    function previewSend() {
+        const input = document.getElementById('preview-input');
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        addPreviewMsg('user', text);
+
+        setTimeout(() => {
+            const answer = findPreviewAnswer(text);
+            addPreviewMsg('bot', answer || data.settings.fallback || '回答が見つかりませんでした。');
+        }, 500);
+    }
+
+    function findPreviewAnswer(msg) {
+        const normalized = msg.toLowerCase().replace(/[？?！!。、\s]/g, '');
+        let best = null, bestScore = 0;
+        for (const entry of data.entries) {
+            let score = 0;
+            for (const kw of (entry.keywords || [])) {
+                if (normalized.includes(kw.toLowerCase().replace(/\s/g, ''))) score += 10;
+            }
+            for (const q of (entry.questions || [])) {
+                const qn = q.toLowerCase().replace(/[？?！!。、\s]/g, '');
+                if (normalized.includes(qn) || qn.includes(normalized)) score += 15;
+                const common = [...normalized].filter(c => qn.includes(c)).length;
+                if (common / Math.max(normalized.length, qn.length) > 0.5) score += 5;
+            }
+            if (score > bestScore) { bestScore = score; best = entry; }
+        }
+        return bestScore >= 5 ? best?.answer : null;
+    }
+
+    function addPreviewMsg(type, text) {
+        const msgs = document.getElementById('preview-messages');
+        const div = document.createElement('div');
+        div.className = 'preview-msg preview-msg-' + type;
+        div.textContent = text;
+        msgs.appendChild(div);
+        msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    // --- ユーティリティ ---
+    function escapeHtml(str) {
+        const el = document.createElement('span');
+        el.textContent = str || '';
+        return el.innerHTML;
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+
+    // 起動
+    init();
+    </script>
+</body>
+</html>

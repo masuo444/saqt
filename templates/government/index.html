@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ORG_NAME}} | 公式ウェブサイト</title>
+  <meta name="description" content="{{ORG_NAME}}の公式ウェブサイトです。{{DESCRIPTION}}">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: {
+            50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',
+            400:'#60a5fa',500:'#1d4ed8',600:'#1e40af',700:'#1a337a',
+            800:'#152a6b',900:'#10225c',950:'#0a1740'
+          }
+        },
+        fontFamily: {
+          sans: ['Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','sans-serif']
+        },
+        maxWidth: {
+          'content': '960px'
+        }
+      }
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white min-h-screen text-slate-900" style="font-size:17px; line-height:1.8;">
+
+  <!-- Skip navigation -->
+  <a href="#main-content" class="skip-link">本文へスキップ</a>
+
+  <!-- ====== ACCESSIBILITY TOOLBAR ====== -->
+  <div id="a11y-toolbar" class="bg-slate-100 border-b border-slate-200" role="toolbar" aria-label="アクセシビリティツールバー">
+    <div class="max-w-content mx-auto px-4 py-1.5 flex flex-wrap items-center justify-between gap-2 text-sm">
+      <div class="flex items-center gap-4">
+        <!-- Font size -->
+        <div class="flex items-center gap-1" role="group" aria-label="文字サイズ変更">
+          <span class="text-slate-600 mr-1">文字サイズ</span>
+          <button type="button" class="font-size-btn inline-flex items-center justify-center w-8 h-8 border border-slate-300 bg-white text-slate-700 rounded" data-size="small" aria-label="文字サイズ: 小">小</button>
+          <button type="button" class="font-size-btn inline-flex items-center justify-center w-8 h-8 border border-primary-500 bg-primary-50 text-primary-700 rounded font-medium" data-size="medium" aria-label="文字サイズ: 中" aria-pressed="true">中</button>
+          <button type="button" class="font-size-btn inline-flex items-center justify-center w-8 h-8 border border-slate-300 bg-white text-slate-700 rounded" data-size="large" aria-label="文字サイズ: 大">大</button>
+        </div>
+        <!-- Color scheme -->
+        <div class="flex items-center gap-1" role="group" aria-label="配色変更">
+          <span class="text-slate-600 mr-1">配色</span>
+          <button type="button" class="color-scheme-btn inline-flex items-center justify-center h-8 px-2.5 border border-primary-500 bg-primary-50 text-primary-700 rounded text-xs font-medium" data-scheme="normal" aria-label="配色: 通常" aria-pressed="true">通常</button>
+          <button type="button" class="color-scheme-btn inline-flex items-center justify-center h-8 px-2.5 border border-slate-300 bg-white text-slate-700 rounded text-xs" data-scheme="bw" aria-label="配色: 白黒">白黒</button>
+          <button type="button" class="color-scheme-btn inline-flex items-center justify-center h-8 px-2.5 border border-slate-300 bg-white text-slate-700 rounded text-xs" data-scheme="blue" aria-label="配色: 青">青</button>
+        </div>
+      </div>
+      <!-- Language selector -->
+      <div class="flex items-center gap-2 text-xs">
+        <span class="font-medium text-slate-900" aria-current="true">日本語</span>
+        <a href="#" class="text-primary-500 underline" hreflang="en">English</a>
+        <a href="#" class="text-primary-500 underline" hreflang="zh">中文</a>
+        <a href="#" class="text-primary-500 underline" hreflang="ko">한국어</a>
+        <a href="#" class="text-primary-500 underline">やさしい日本語</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== EMERGENCY BANNER (optional) ====== -->
+  <!--
+  <div class="bg-red-700 text-white" role="alert">
+    <div class="max-w-content mx-auto px-4 py-3 flex items-center gap-3">
+      <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p class="text-sm font-medium">緊急情報: 現在、緊急の災害情報があります。<a href="#" class="underline font-bold">詳細はこちら</a></p>
+    </div>
+  </div>
+  -->
+
+  <!-- ====== HEADER ====== -->
+  <header id="header" class="bg-white border-b border-slate-200">
+    <!-- Top row: org name + search -->
+    <div class="max-w-content mx-auto px-4 py-4 flex items-center justify-between gap-4">
+      <a href="#" class="text-xl md:text-2xl font-bold text-slate-900 no-underline leading-tight">
+        {{ORG_NAME}}
+      </a>
+      <!-- Search bar -->
+      <div class="hidden sm:block flex-shrink-0">
+        <form role="search" aria-label="サイト内検索" class="flex items-center">
+          <label for="site-search" class="sr-only">検索キーワード</label>
+          <input type="search" id="site-search" name="q" placeholder="サイト内検索" class="w-48 md:w-64 h-10 px-3 text-sm border border-slate-300 rounded-l bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50">
+          <button type="submit" class="inline-flex items-center justify-center w-10 h-10 bg-primary-500 text-white rounded-r" aria-label="検索">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </form>
+      </div>
+      <!-- Mobile hamburger -->
+      <button id="hamburger" class="lg:hidden w-12 h-12 inline-flex flex-col items-center justify-center gap-1.5 cursor-pointer border border-slate-300 rounded" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="hamburger-line block w-5 h-0.5 bg-slate-900 transition-all duration-200 origin-center"></span>
+        <span class="hamburger-line block w-5 h-0.5 bg-slate-900 transition-all duration-200 origin-center"></span>
+        <span class="hamburger-line block w-5 h-0.5 bg-slate-900 transition-all duration-200 origin-center"></span>
+      </button>
+    </div>
+    <!-- Mobile search (visible on small screens) -->
+    <div class="sm:hidden px-4 pb-3">
+      <form role="search" aria-label="サイト内検索（モバイル）" class="flex items-center">
+        <label for="site-search-mobile" class="sr-only">検索キーワード</label>
+        <input type="search" id="site-search-mobile" name="q" placeholder="サイト内検索" class="flex-1 h-10 px-3 text-sm border border-slate-300 rounded-l bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50">
+        <button type="submit" class="inline-flex items-center justify-center w-10 h-10 bg-primary-500 text-white rounded-r" aria-label="検索">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+    </div>
+    <!-- Desktop navigation -->
+    <nav id="desktop-nav" class="hidden lg:block bg-primary-500" aria-label="メインナビゲーション">
+      <div class="max-w-content mx-auto px-4 flex items-center">
+        <a href="#" class="nav-link flex items-center h-12 px-5 text-sm font-medium text-white hover:bg-primary-600 no-underline transition-colors">{{NAV_1}}</a>
+        <a href="#" class="nav-link flex items-center h-12 px-5 text-sm font-medium text-white hover:bg-primary-600 no-underline transition-colors">{{NAV_2}}</a>
+        <a href="#" class="nav-link flex items-center h-12 px-5 text-sm font-medium text-white hover:bg-primary-600 no-underline transition-colors">{{NAV_3}}</a>
+        <a href="#" class="nav-link flex items-center h-12 px-5 text-sm font-medium text-white hover:bg-primary-600 no-underline transition-colors">{{NAV_4}}</a>
+        <a href="#" class="nav-link flex items-center h-12 px-5 text-sm font-medium text-white hover:bg-primary-600 no-underline transition-colors">{{NAV_5}}</a>
+        <a href="#" class="nav-link flex items-center h-12 px-5 text-sm font-medium text-white hover:bg-primary-600 no-underline transition-colors">{{NAV_6}}</a>
+      </div>
+    </nav>
+    <!-- Mobile navigation -->
+    <nav id="mobile-nav" class="mobile-nav lg:hidden fixed inset-0 top-0 bg-white z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto" aria-label="モバイルナビゲーション">
+      <div class="flex items-center justify-between px-4 py-4 border-b border-slate-200">
+        <span class="font-bold text-lg text-slate-900">メニュー</span>
+        <button id="mobile-nav-close" type="button" class="w-12 h-12 inline-flex items-center justify-center border border-slate-300 rounded" aria-label="メニューを閉じる">
+          <svg class="w-5 h-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <!-- Mobile search -->
+      <div class="px-4 py-3 border-b border-slate-200">
+        <form role="search" aria-label="サイト内検索（メニュー内）" class="flex items-center">
+          <label for="site-search-nav" class="sr-only">検索キーワード</label>
+          <input type="search" id="site-search-nav" name="q" placeholder="サイト内検索" class="flex-1 h-12 px-3 text-base border border-slate-300 rounded-l bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50">
+          <button type="submit" class="inline-flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-r" aria-label="検索">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="px-4 py-4 flex flex-col gap-1">
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base font-medium text-slate-900 hover:bg-slate-50 rounded no-underline">{{NAV_1}}</a>
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base font-medium text-slate-900 hover:bg-slate-50 rounded no-underline">{{NAV_2}}</a>
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base font-medium text-slate-900 hover:bg-slate-50 rounded no-underline">{{NAV_3}}</a>
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base font-medium text-slate-900 hover:bg-slate-50 rounded no-underline">{{NAV_4}}</a>
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base font-medium text-slate-900 hover:bg-slate-50 rounded no-underline">{{NAV_5}}</a>
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base font-medium text-slate-900 hover:bg-slate-50 rounded no-underline">{{NAV_6}}</a>
+        <hr class="border-t border-slate-200 my-2" role="separator">
+        <a href="#" class="mobile-nav-link flex items-center h-12 px-4 text-base text-slate-600 hover:bg-slate-50 rounded no-underline">サイトマップ</a>
+        <a href="#access" class="mobile-nav-link flex items-center h-12 px-4 text-base text-slate-600 hover:bg-slate-50 rounded no-underline">窓口案内</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ====== BREADCRUMBS ====== -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-content mx-auto px-4 py-2">
+      <nav aria-label="パンくずリスト">
+        <ol class="flex items-center gap-1.5 text-sm text-slate-500">
+          <li><a href="#" class="hover:text-slate-700 no-underline">ホーム</a></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main id="main-content">
+
+    <!-- ====== IMPORTANT NOTICES ====== -->
+    <section class="bg-white border-b border-slate-200" aria-label="重要なお知らせ">
+      <div class="max-w-content mx-auto px-4 py-4">
+        <div class="bg-amber-50 border border-amber-300 rounded p-4">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div>
+              <p class="font-bold text-amber-800 text-sm mb-1">重要なお知らせ</p>
+              <ul class="text-sm text-amber-900 space-y-1">
+                <li><a href="#" class="underline">令和8年度 各種届出の受付期間について</a></li>
+                <li><a href="#" class="underline">年末年始の窓口業務のご案内</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== QUICK LINKS ====== -->
+    <section class="bg-white py-8 border-b border-slate-200" aria-labelledby="quicklinks-heading">
+      <div class="max-w-content mx-auto px-4">
+        <h2 id="quicklinks-heading" class="text-lg font-bold text-slate-900 mb-4">よく利用されるメニュー</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <!-- Quick link 1 -->
+          <a href="#" class="quick-link flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 border border-slate-200 rounded hover:bg-primary-50 hover:border-primary-300 no-underline transition-colors min-h-[80px]">
+            <svg class="w-6 h-6 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="text-sm font-medium text-slate-900 text-center leading-snug">届出・申請</span>
+          </a>
+          <!-- Quick link 2 -->
+          <a href="#" class="quick-link flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 border border-slate-200 rounded hover:bg-primary-50 hover:border-primary-300 no-underline transition-colors min-h-[80px]">
+            <svg class="w-6 h-6 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            <span class="text-sm font-medium text-slate-900 text-center leading-snug">子育て・教育</span>
+          </a>
+          <!-- Quick link 3 -->
+          <a href="#" class="quick-link flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 border border-slate-200 rounded hover:bg-primary-50 hover:border-primary-300 no-underline transition-colors min-h-[80px]">
+            <svg class="w-6 h-6 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="text-sm font-medium text-slate-900 text-center leading-snug">健康・医療</span>
+          </a>
+          <!-- Quick link 4 -->
+          <a href="#" class="quick-link flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 border border-slate-200 rounded hover:bg-primary-50 hover:border-primary-300 no-underline transition-colors min-h-[80px]">
+            <svg class="w-6 h-6 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span class="text-sm font-medium text-slate-900 text-center leading-snug">施設案内</span>
+          </a>
+          <!-- Quick link 5 -->
+          <a href="#" class="quick-link flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 border border-slate-200 rounded hover:bg-primary-50 hover:border-primary-300 no-underline transition-colors min-h-[80px]">
+            <svg class="w-6 h-6 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span class="text-sm font-medium text-slate-900 text-center leading-snug">よくある質問</span>
+          </a>
+          <!-- Quick link 6 -->
+          <a href="#" class="quick-link flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 border border-slate-200 rounded hover:bg-primary-50 hover:border-primary-300 no-underline transition-colors min-h-[80px]">
+            <svg class="w-6 h-6 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span class="text-sm font-medium text-slate-900 text-center leading-snug">防災・緊急情報</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== NEWS / ANNOUNCEMENTS ====== -->
+    <section class="bg-slate-50 py-8 border-b border-slate-200" aria-labelledby="news-heading">
+      <div class="max-w-content mx-auto px-4">
+        <div class="flex items-center justify-between mb-4">
+          <h2 id="news-heading" class="text-lg font-bold text-slate-900">新着情報</h2>
+          <a href="#" class="text-sm text-primary-500 underline">一覧を見る</a>
+        </div>
+        <div class="bg-white border border-slate-200 rounded divide-y divide-slate-200">
+          <!-- News item 1 -->
+          <article class="p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <time class="text-sm text-slate-500 flex-shrink-0 tabular-nums" datetime="2026-03-15">2026年3月15日</time>
+              <span class="inline-block bg-primary-100 text-primary-700 px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 w-fit">お知らせ</span>
+              <a href="#" class="text-sm text-slate-900 underline hover:text-primary-500">令和8年度 各種届出の受付期間について</a>
+            </div>
+          </article>
+          <!-- News item 2 -->
+          <article class="p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <time class="text-sm text-slate-500 flex-shrink-0 tabular-nums" datetime="2026-03-10">2026年3月10日</time>
+              <span class="inline-block bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 w-fit">重要</span>
+              <a href="#" class="text-sm text-slate-900 underline hover:text-primary-500">マイナンバーカード申請窓口の受付時間変更について</a>
+            </div>
+          </article>
+          <!-- News item 3 -->
+          <article class="p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <time class="text-sm text-slate-500 flex-shrink-0 tabular-nums" datetime="2026-03-01">2026年3月1日</time>
+              <span class="inline-block bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 w-fit">募集</span>
+              <a href="#" class="text-sm text-slate-900 underline hover:text-primary-500">令和8年度パブリックコメント募集のお知らせ</a>
+            </div>
+          </article>
+          <!-- News item 4 -->
+          <article class="p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <time class="text-sm text-slate-500 flex-shrink-0 tabular-nums" datetime="2026-02-20">2026年2月20日</time>
+              <span class="inline-block bg-primary-100 text-primary-700 px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 w-fit">お知らせ</span>
+              <a href="#" class="text-sm text-slate-900 underline hover:text-primary-500">確定申告の相談窓口を開設しています</a>
+            </div>
+          </article>
+          <!-- News item 5 -->
+          <article class="p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <time class="text-sm text-slate-500 flex-shrink-0 tabular-nums" datetime="2026-02-10">2026年2月10日</time>
+              <span class="inline-block bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 w-fit">イベント</span>
+              <a href="#" class="text-sm text-slate-900 underline hover:text-primary-500">市民まつり開催のお知らせ</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== PICKUP / FEATURED ====== -->
+    <section class="bg-white py-8 border-b border-slate-200" aria-labelledby="pickup-heading">
+      <div class="max-w-content mx-auto px-4">
+        <h2 id="pickup-heading" class="text-lg font-bold text-slate-900 mb-4">ピックアップ</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <!-- Featured 1 -->
+          <a href="#" class="block bg-white border border-slate-200 rounded p-5 hover:border-primary-300 hover:bg-primary-50/30 no-underline transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 bg-primary-100 text-primary-600 rounded inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">確定申告</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">確定申告に関する相談窓口・受付期間・必要書類についてご案内しています。</p>
+          </a>
+          <!-- Featured 2 -->
+          <a href="#" class="block bg-white border border-slate-200 rounded p-5 hover:border-primary-300 hover:bg-primary-50/30 no-underline transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 bg-primary-100 text-primary-600 rounded inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">予防接種</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">各種予防接種の対象者・接種場所・予約方法についてのご案内です。</p>
+          </a>
+          <!-- Featured 3 -->
+          <a href="#" class="block bg-white border border-slate-200 rounded p-5 hover:border-primary-300 hover:bg-primary-50/30 no-underline transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 bg-primary-100 text-primary-600 rounded inline-flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">防災情報</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">避難場所・ハザードマップ・災害時の連絡先など防災に関する情報です。</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== LIFE EVENTS ====== -->
+    <section class="bg-slate-50 py-8 border-b border-slate-200" aria-labelledby="life-events-heading">
+      <div class="max-w-content mx-auto px-4">
+        <h2 id="life-events-heading" class="text-lg font-bold text-slate-900 mb-4">ライフイベントから探す</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          <a href="#" class="flex flex-col items-center gap-2 p-3 bg-white border border-slate-200 rounded hover:border-primary-300 no-underline transition-colors min-h-[72px] justify-center">
+            <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="text-xs font-medium text-slate-900 text-center">出生・子育て</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-2 p-3 bg-white border border-slate-200 rounded hover:border-primary-300 no-underline transition-colors min-h-[72px] justify-center">
+            <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            <span class="text-xs font-medium text-slate-900 text-center">入園・入学</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-2 p-3 bg-white border border-slate-200 rounded hover:border-primary-300 no-underline transition-colors min-h-[72px] justify-center">
+            <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <span class="text-xs font-medium text-slate-900 text-center">結婚・離婚</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-2 p-3 bg-white border border-slate-200 rounded hover:border-primary-300 no-underline transition-colors min-h-[72px] justify-center">
+            <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            <span class="text-xs font-medium text-slate-900 text-center">就職・退職</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-2 p-3 bg-white border border-slate-200 rounded hover:border-primary-300 no-underline transition-colors min-h-[72px] justify-center">
+            <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="text-xs font-medium text-slate-900 text-center">引越し</span>
+          </a>
+          <a href="#" class="flex flex-col items-center gap-2 p-3 bg-white border border-slate-200 rounded hover:border-primary-300 no-underline transition-colors min-h-[72px] justify-center">
+            <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="text-xs font-medium text-slate-900 text-center">高齢・介護</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== ACCESS / CONTACT ====== -->
+    <section id="access" class="bg-white py-8" aria-labelledby="access-heading">
+      <div class="max-w-content mx-auto px-4">
+        <h2 id="access-heading" class="text-lg font-bold text-slate-900 mb-4">窓口案内</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Map placeholder -->
+          <div class="bg-slate-100 rounded aspect-[4/3] flex flex-col items-center justify-center text-slate-500 border border-slate-200">
+            <svg class="w-10 h-10 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-sm">Google Maps 埋め込み</span>
+          </div>
+          <!-- Contact info -->
+          <div class="bg-white border border-slate-200 rounded p-5">
+            <table class="w-full text-sm" role="presentation">
+              <tbody>
+                <tr class="border-b border-slate-200">
+                  <th scope="row" class="text-left py-3 pr-4 text-slate-500 font-medium align-top whitespace-nowrap w-24">所在地</th>
+                  <td class="py-3 text-slate-900">{{ADDRESS}}</td>
+                </tr>
+                <tr class="border-b border-slate-200">
+                  <th scope="row" class="text-left py-3 pr-4 text-slate-500 font-medium align-top whitespace-nowrap w-24">電話番号</th>
+                  <td class="py-3 text-slate-900"><a href="tel:{{PHONE}}" class="text-primary-500 underline">{{PHONE}}</a></td>
+                </tr>
+                <tr class="border-b border-slate-200">
+                  <th scope="row" class="text-left py-3 pr-4 text-slate-500 font-medium align-top whitespace-nowrap w-24">FAX</th>
+                  <td class="py-3 text-slate-900">{{FAX}}</td>
+                </tr>
+                <tr class="border-b border-slate-200">
+                  <th scope="row" class="text-left py-3 pr-4 text-slate-500 font-medium align-top whitespace-nowrap w-24">メール</th>
+                  <td class="py-3 text-slate-900"><a href="mailto:{{EMAIL}}" class="text-primary-500 underline">{{EMAIL}}</a></td>
+                </tr>
+                <tr class="border-b border-slate-200">
+                  <th scope="row" class="text-left py-3 pr-4 text-slate-500 font-medium align-top whitespace-nowrap w-24">受付時間</th>
+                  <td class="py-3 text-slate-900">{{HOURS}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left py-3 pr-4 text-slate-500 font-medium align-top whitespace-nowrap w-24">休業日</th>
+                  <td class="py-3 text-slate-900">{{HOLIDAY}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="bg-slate-800 text-slate-300">
+    <!-- Sitemap-style footer -->
+    <div class="max-w-content mx-auto px-4 py-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+        <div>
+          <p class="text-sm font-bold text-white mb-3">{{NAV_1}}</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">届出・申請</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">税金</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">保険・年金</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">住まい・環境</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-white mb-3">{{NAV_2}}</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">保育園・幼稚園</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">小中学校</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">子育て支援</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">青少年育成</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-white mb-3">{{NAV_3}}</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">健康診断</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">予防接種</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">介護サービス</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">障がい者支援</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-white mb-3">{{ORG_NAME}}</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">窓口案内</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">サイトマップ</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">個人情報保護方針</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white no-underline">ウェブアクセシビリティ方針</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-t border-slate-700 mb-6" role="separator">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="text-sm">
+          <p class="font-bold text-white">{{ORG_NAME}}</p>
+          <p class="text-slate-400 text-xs mt-1">{{ADDRESS}} / TEL: {{PHONE}}</p>
+        </div>
+        <div class="text-xs text-slate-500 text-center sm:text-right">
+          <p>&copy; {{YEAR}} {{ORG_NAME}}</p>
+          <p class="mt-1">Demo site created by SAQT</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== SCRIPTS ====== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ===== Hamburger menu ===== */
+      var btn = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var closeBtn = document.getElementById('mobile-nav-close');
+      var links = mobileNav.querySelectorAll('.mobile-nav-link');
+
+      function toggleMenu(open) {
+        var isOpen = typeof open === 'boolean' ? open : !mobileNav.classList.contains('is-open');
+        mobileNav.classList.toggle('is-open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+        if (isOpen) {
+          closeBtn.focus();
+        }
+      }
+
+      btn.addEventListener('click', function () { toggleMenu(); });
+      closeBtn.addEventListener('click', function () { toggleMenu(false); });
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () { toggleMenu(false); });
+      }
+
+      /* Close on Escape key */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) {
+          toggleMenu(false);
+          btn.focus();
+        }
+      });
+
+      /* ===== Accessibility toolbar: Font size ===== */
+      var fontBtns = document.querySelectorAll('.font-size-btn');
+      var sizes = { small: '15px', medium: '17px', large: '20px' };
+
+      fontBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var size = this.getAttribute('data-size');
+          document.body.style.fontSize = sizes[size];
+          fontBtns.forEach(function (fb) {
+            fb.setAttribute('aria-pressed', 'false');
+            fb.className = fb.className.replace(/border-primary-500 bg-primary-50 text-primary-700 font-medium/g, 'border-slate-300 bg-white text-slate-700');
+          });
+          this.setAttribute('aria-pressed', 'true');
+          this.className = this.className.replace(/border-slate-300 bg-white text-slate-700/g, 'border-primary-500 bg-primary-50 text-primary-700 font-medium');
+        });
+      });
+
+      /* ===== Accessibility toolbar: Color scheme ===== */
+      var colorBtns = document.querySelectorAll('.color-scheme-btn');
+
+      colorBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var scheme = this.getAttribute('data-scheme');
+          document.body.classList.remove('scheme-bw', 'scheme-blue');
+          if (scheme !== 'normal') {
+            document.body.classList.add('scheme-' + scheme);
+          }
+          colorBtns.forEach(function (cb) {
+            cb.setAttribute('aria-pressed', 'false');
+            cb.className = cb.className.replace(/border-primary-500 bg-primary-50 text-primary-700 font-medium/g, 'border-slate-300 bg-white text-slate-700');
+          });
+          this.setAttribute('aria-pressed', 'true');
+          this.className = this.className.replace(/border-slate-300 bg-white text-slate-700/g, 'border-primary-500 bg-primary-50 text-primary-700 font-medium');
+        });
+      });
+
+      /* ===== Smooth scroll for anchor links ===== */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = this.getAttribute('href');
+          if (id === '#') return;
+          var target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* ===== Clinic Template — Minimal CSS =====
+   Most styling is handled by Tailwind classes in HTML.
+   This file covers: custom properties, scroll animations,
+   hamburger states, and utilities not available in Tailwind CDN.
+*/
+
+/* --- Custom Properties --- */
+:root {
+  --color-body: #3d4b5f;
+}
+
+/* --- Base --- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Header scroll state --- */
+.is-scrolled {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Hamburger animation --- */
+.is-active .hamburger-line:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+.is-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.is-active .hamburger-line:nth-child(3) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* --- Mobile nav state --- */
+.mobile-nav.is-open {
+  transform: translateX(0);
+}
+
+/* --- Scroll reveal --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Schedule table --- */
+.schedule-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.schedule-table th,
+.schedule-table td {
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.schedule-table thead th {
+  font-weight: 500;
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

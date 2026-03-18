@@ -1,0 +1,158 @@
+/* ============================================
+   Government / Municipal Website Template
+   style.css — Accessibility, print, overrides
+   ============================================ */
+
+/* ===== Skip navigation link ===== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ===== Focus visible outlines ===== */
+*:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+/* ===== Mobile navigation ===== */
+.mobile-nav {
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav.is-open {
+  transform: translateX(0);
+}
+
+/* ===== Accessibility: Color schemes ===== */
+
+/* Black & white (high contrast) */
+.scheme-bw {
+  filter: grayscale(1) contrast(1.2);
+}
+
+.scheme-bw a {
+  text-decoration: underline !important;
+}
+
+/* Blue background (low vision) */
+.scheme-blue {
+  background-color: #0a1e3d !important;
+  color: #e0e8f5 !important;
+}
+
+.scheme-blue * {
+  color: inherit !important;
+  border-color: #2a4a7a !important;
+}
+
+.scheme-blue a {
+  color: #93c5fd !important;
+  text-decoration: underline !important;
+}
+
+.scheme-blue .bg-white,
+.scheme-blue .bg-slate-50,
+.scheme-blue .bg-slate-100,
+.scheme-blue .bg-amber-50 {
+  background-color: #0f2847 !important;
+}
+
+.scheme-blue .bg-primary-500 {
+  background-color: #1e40af !important;
+}
+
+.scheme-blue .bg-slate-800 {
+  background-color: #060f1f !important;
+}
+
+.scheme-blue .border-slate-200,
+.scheme-blue .border-slate-300,
+.scheme-blue .divide-slate-200 > * + * {
+  border-color: #2a4a7a !important;
+}
+
+/* ===== Print styles ===== */
+@media print {
+  /* Hide non-essential elements */
+  #a11y-toolbar,
+  #hamburger,
+  #mobile-nav,
+  #desktop-nav,
+  .skip-link,
+  .quick-link svg,
+  form[role="search"] {
+    display: none !important;
+  }
+
+  /* Reset background colors for printing */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt !important;
+    line-height: 1.6 !important;
+  }
+
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+  }
+
+  /* Show URLs after links */
+  a[href^="http"]::after,
+  a[href^="mailto"]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #555 !important;
+  }
+
+  /* Ensure content fits page */
+  .max-w-content {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Show all content in single column */
+  .grid {
+    display: block !important;
+  }
+
+  .grid > * {
+    margin-bottom: 16px;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Footer: simplified */
+  footer {
+    border-top: 1px solid #ccc;
+    padding-top: 12px;
+  }
+}

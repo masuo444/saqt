@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坂戸市商工会様 - リニューアルご提案 | SAQT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Sans JP',sans-serif;color:#1e293b;line-height:1.8;background:#f8fafc}
+        .container{max-width:840px;margin:0 auto;padding:0 24px}
+
+        /* Header */
+        .header{background:#0f172a;color:#fff;padding:48px 0;text-align:center;position:relative;overflow:hidden}
+        .header::before{content:'';position:absolute;top:-60px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,0.15),transparent 70%)}
+        .header-badge{display:inline-block;background:rgba(249,115,22,0.12);color:#f97316;padding:6px 18px;border-radius:50px;font-size:0.75rem;font-weight:600;margin-bottom:20px;border:1px solid rgba(249,115,22,0.25)}
+        .header h1{font-size:1.5rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;position:relative}
+        .header h1 span{color:#f97316}
+        .header p{color:rgba(255,255,255,0.45);font-size:0.82rem}
+
+        /* Section */
+        .section{padding:48px 0}
+        .section-title{font-family:'Inter','Noto Sans JP',sans-serif;font-size:1.25rem;font-weight:800;color:#0f172a;margin-bottom:24px;letter-spacing:-0.03em}
+        .section-title span{color:#f97316}
+
+        /* Score */
+        .score-section{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:36px;margin-bottom:32px}
+        .score-row{display:flex;align-items:center;gap:24px;margin-bottom:24px}
+        .score-circle{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0}
+        .score-circle .num{font-family:'Inter',sans-serif;font-size:2rem;font-weight:900;color:#fff;line-height:1}
+        .score-circle .label{font-size:0.6rem;color:rgba(255,255,255,0.7);margin-top:2px}
+        .score-critical{background:linear-gradient(135deg,#dc2626,#ef4444)}
+        .score-info h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+        .score-info p{font-size:0.85rem;color:#64748b}
+
+        .issue-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+        .issue-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;font-size:0.84rem;color:#991b1b}
+        .issue-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#dc2626;margin-top:1px}
+
+        /* ROI */
+        .roi-grid{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+        .roi-card{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}
+        .roi-before,.roi-after{padding:20px;border-radius:12px;font-size:0.84rem}
+        .roi-before{background:#f8fafc;border:1px solid #e2e8f0;color:#64748b}
+        .roi-after{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+        .roi-label{display:inline-block;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:2px 8px;border-radius:50px;margin-bottom:8px}
+        .roi-before .roi-label{background:#f1f5f9;color:#64748b}
+        .roi-after .roi-label{background:#dcfce7;color:#166534}
+        .roi-before strong,.roi-after strong{display:block;font-size:0.9rem;margin-bottom:4px;color:#0f172a}
+        .roi-after strong{color:#166534}
+        .roi-arrow{display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:1.3rem;font-weight:700}
+
+        /* Demo Preview */
+        .demo-section{background:#fff;border:2px solid #f97316;border-radius:16px;overflow:hidden;margin-bottom:32px}
+        .demo-browser{background:#f1f5f9;padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #e2e8f0}
+        .demo-dot{width:8px;height:8px;border-radius:50%}
+        .demo-dot:nth-child(1){background:#ef4444}
+        .demo-dot:nth-child(2){background:#f59e0b}
+        .demo-dot:nth-child(3){background:#10b981}
+        .demo-url{margin-left:10px;background:#fff;padding:3px 14px;border-radius:5px;font-size:0.7rem;color:#64748b;border:1px solid #e2e8f0}
+
+        /* Mini site */
+        .mini-site{background:#0f172a}
+        .mini-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.06)}
+        .mini-logo{font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:800;color:#fff}
+        .mini-nav-links{display:flex;gap:16px}
+        .mini-nav-links span{font-size:0.68rem;color:rgba(255,255,255,0.4);font-weight:500}
+        .mini-hero-section{padding:48px 24px;text-align:center}
+        .mini-hero-badge{display:inline-block;background:rgba(249,115,22,0.12);color:#f97316;padding:4px 14px;border-radius:50px;font-size:0.65rem;font-weight:600;margin-bottom:12px;border:1px solid rgba(249,115,22,0.2)}
+        .mini-hero-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-0.03em}
+        .mini-hero-sub{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-bottom:20px}
+        .mini-btn{display:inline-block;background:#f97316;color:#fff;padding:8px 24px;border-radius:50px;font-size:0.72rem;font-weight:600;text-decoration:none}
+        .mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:24px}
+        .mini-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:16px;text-align:center}
+        .mini-card-icon{font-size:1.2rem;margin-bottom:8px}
+        .mini-card h4{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:4px}
+        .mini-card p{font-size:0.6rem;color:rgba(255,255,255,0.35)}
+        .mini-info{background:rgba(255,255,255,0.03);padding:20px 24px;display:flex;justify-content:center;gap:24px;font-size:0.68rem;color:rgba(255,255,255,0.4);border-top:1px solid rgba(255,255,255,0.06)}
+        .mini-cta{background:#f97316;padding:20px;text-align:center}
+        .mini-cta p{font-size:0.72rem;color:rgba(255,255,255,0.9);font-weight:600}
+
+        /* Features */
+        .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
+        .feature-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;transition:all 0.2s}
+        .feature-card:hover{border-color:rgba(249,115,22,0.2);box-shadow:0 4px 16px rgba(0,0,0,0.04)}
+        .feature-card h4{font-size:0.88rem;font-weight:700;color:#0f172a;margin-bottom:4px}
+        .feature-card p{font-size:0.78rem;color:#64748b}
+
+        /* Campaign */
+        .campaign-box{background:linear-gradient(135deg,#ea580c,#f97316);color:#fff;border-radius:14px;padding:28px;text-align:center;margin-bottom:32px}
+        .campaign-box h3{font-size:1rem;font-weight:800;margin-bottom:6px}
+        .campaign-box p{font-size:0.82rem;opacity:0.9}
+
+        /* CTA */
+        .cta{background:#0f172a;padding:56px 0;text-align:center;color:#fff;position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,0.12),transparent 70%)}
+        .cta h2{font-size:1.3rem;font-weight:800;margin-bottom:12px;letter-spacing:-0.03em;position:relative}
+        .cta>div>p{color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:28px;position:relative}
+        .cta-btn{display:inline-block;background:#f97316;color:#fff;padding:14px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:0.9rem;position:relative;box-shadow:0 4px 20px rgba(249,115,22,0.3)}
+        .cta-btn:hover{box-shadow:0 8px 32px rgba(249,115,22,0.4)}
+
+        .footer{padding:20px 0;text-align:center;font-size:0.72rem;color:#94a3b8}
+
+        @media(max-width:640px){
+            .roi-card{grid-template-columns:1fr;gap:8px}
+            .roi-arrow{transform:rotate(90deg);padding:4px 0}
+            .score-row{flex-direction:column;text-align:center}
+            .mini-cards{grid-template-columns:1fr}
+            .feature-grid{grid-template-columns:1fr}
+            .mini-nav-links{display:none}
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-badge">SAQT（サクッと）からのご提案</div>
+        <h1>坂戸市商工会様の<br>サイト<span>リニューアルプラン</span></h1>
+        <p>作成日: 2026年3月18日</p>
+    </div>
+</header>
+
+<!-- 診断結果 -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">現サイトの<span>診断結果</span></h2>
+        <div class="score-section">
+            <div class="score-row">
+                <div class="score-circle score-critical">
+                    <span class="num">15</span>
+                    <span class="label">/100</span>
+                </div>
+                <div class="score-info">
+                    <h3>改善の余地が非常に大きい状態です</h3>
+                    <p>現在のサイトは2013年ごろの技術で構築されており、現在の基準から見ると9項目の課題が検出されました。</p>
+                </div>
+            </div>
+            <ul class="issue-list">
+                <li class="issue-item"><span class="issue-icon">!</span>スマートフォン未対応 — スマホで閲覧すると横スクロールが発生し、文字が極端に小さく表示されます</li>
+                <li class="issue-item"><span class="issue-icon">!</span>SSL未対応（http://） — ブラウザに「保護されていない通信」と表示。会員情報の送信にリスクあり</li>
+                <li class="issue-item"><span class="issue-icon">!</span>frameタグ使用 — 2000年代の技術。SEO（検索順位）に重大な悪影響</li>
+                <li class="issue-item"><span class="issue-icon">!</span>tableレイアウト・fontタグ・centerタグ — 現代のWeb標準に非準拠</li>
+                <li class="issue-item"><span class="issue-icon">!</span>レスポンシブ未対応 — 閲覧者の7割以上はスマホ。その全員が不便を感じている状態</li>
+                <li class="issue-item"><span class="issue-icon">!</span>文字コードがShift_JIS — 文字化けの原因に。UTF-8が現在の標準</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ROI -->
+<div class="section" style="background:#fff;border-top:1px solid #e2e8f0;padding-top:48px">
+    <div class="container">
+        <h2 class="section-title">リニューアルで<span>得られる効果</span></h2>
+        <div class="roi-grid">
+            <div class="roi-card">
+                <div class="roi-before">
+                    <span class="roi-label">現状</span>
+                    <strong>スマホで見ると読めない</strong>
+                    <p>会員がスマホでアクセスしても、文字が小さすぎて情報を確認できない。離脱率が高い状態。</p>
+                </div>
+                <div class="roi-arrow">&rarr;</div>
+                <div class="roi-after">
+                    <span class="roi-label">リニューアル後</span>
+                    <strong>全デバイスで快適に閲覧</strong>
+                    <p>スマホ・タブレット・PCすべてで最適表示。会員の利便性が大幅に向上。</p>
+                </div>
+            </div>
+            <div class="roi-card">
+                <div class="roi-before">
+                    <span class="roi-label">現状</span>
+                    <strong>「保護されていない通信」と表示</strong>
+                    <p>SSL未対応のため、ブラウザが警告を表示。訪問者に不安を与えている。</p>
+                </div>
+                <div class="roi-arrow">&rarr;</div>
+                <div class="roi-after">
+                    <span class="roi-label">リニューアル後</span>
+                    <strong>SSL対応で安心のサイトに</strong>
+                    <p>https対応で「保護された通信」表示に。会員情報の送信も安全に。</p>
+                </div>
+            </div>
+            <div class="roi-card">
+                <div class="roi-before">
+                    <span class="roi-label">現状</span>
+                    <strong>検索で見つかりにくい</strong>
+                    <p>frameタグ・古い構造のため、Google検索での評価が低い。新規会員の流入機会を損失。</p>
+                </div>
+                <div class="roi-arrow">&rarr;</div>
+                <div class="roi-after">
+                    <span class="roi-label">リニューアル後</span>
+                    <strong>SEO最適化で検索上位へ</strong>
+                    <p>モダンなHTML構造 + SEO対策で、「坂戸市 商工会」での検索順位が向上。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- リニューアル後イメージ -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">リニューアル後の<span>イメージ</span></h2>
+        <div class="demo-section">
+            <div class="demo-browser">
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
+                <span class="demo-url">https://www.sakado.or.jp</span>
+            </div>
+            <div class="mini-site">
+                <div class="mini-nav">
+                    <div class="mini-logo">坂戸市商工会</div>
+                    <div class="mini-nav-links">
+                        <span>商工会について</span>
+                        <span>会員サービス</span>
+                        <span>融資・補助金</span>
+                        <span>イベント</span>
+                        <span>お問い合わせ</span>
+                    </div>
+                </div>
+                <div class="mini-hero-section">
+                    <div class="mini-hero-badge">坂戸市の事業者を全力サポート</div>
+                    <div class="mini-hero-title">経営のお悩み、<br>まずはご相談ください。</div>
+                    <div class="mini-hero-sub">融資相談・税務経理・労働保険・共済制度まで、ワンストップで対応</div>
+                    <a href="#" class="mini-btn">お問い合わせ</a>
+                </div>
+                <div class="mini-cards">
+                    <div class="mini-card">
+                        <div class="mini-card-icon">💰</div>
+                        <h4>融資・資金繰り</h4>
+                        <p>各種融資制度のご案内</p>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-card-icon">📋</div>
+                        <h4>税務・経理</h4>
+                        <p>記帳指導・確定申告支援</p>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-card-icon">🛡️</div>
+                        <h4>共済・保険</h4>
+                        <p>各種共済制度のご案内</p>
+                    </div>
+                </div>
+                <div class="mini-info">
+                    <span>〒350-0229 埼玉県坂戸市薬師町31-3</span>
+                    <span>TEL: 049-282-1331</span>
+                </div>
+                <div class="mini-cta">
+                    <p>お気軽にご相談ください &rarr; お問い合わせフォーム</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 含まれるもの -->
+<div class="section" style="background:#fff;border-top:1px solid #e2e8f0">
+    <div class="container">
+        <h2 class="section-title">リニューアルに<span>含まれるもの</span></h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>レスポンシブデザイン</h4>
+                <p>スマホ・タブレット・PC全てで最適な表示に</p>
+            </div>
+            <div class="feature-card">
+                <h4>SSL対応（https化）</h4>
+                <p>「保護されていない通信」の警告を解消</p>
+            </div>
+            <div class="feature-card">
+                <h4>SEO対策</h4>
+                <p>モダンなHTML構造で検索順位を改善</p>
+            </div>
+            <div class="feature-card">
+                <h4>お問い合わせフォーム</h4>
+                <p>会員や事業者からの相談を受けやすく</p>
+            </div>
+            <div class="feature-card">
+                <h4>会員事業者リンク一覧</h4>
+                <p>業種別に検索・閲覧しやすいレイアウトに</p>
+            </div>
+            <div class="feature-card">
+                <h4>最新情報・お知らせ</h4>
+                <p>Facebook連携やお知らせの更新が簡単に</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- キャンペーン -->
+<div class="section" style="padding-bottom:24px">
+    <div class="container">
+        <div class="campaign-box">
+            <h3>【期間限定】チャットボット無料導入キャンペーン</h3>
+            <p>4月末までにご依頼で、24時間対応の自動応答チャットボット（30万円相当）を無料導入</p>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <h2>このプランについて<br>詳しくお話しませんか？</h2>
+        <p>オンラインで短時間。デモをお見せしながらご説明します。<br>ご採用いただかない場合でも費用は一切かかりません。</p>
+        <a href="mailto:info@saqt-ai.com?subject=坂戸市商工会のリニューアルについて" class="cta-btn">日程を調整する</a>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>SAQT（サクッと） | saqt-ai.com | 運営: 合同会社FOMUS</p>
+    </div>
+</footer>
+
+</body>
+</html>

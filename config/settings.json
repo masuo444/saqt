@@ -1,0 +1,156 @@
+{
+  "brand": {
+    "name": "SAQT",
+    "name_ja": "サクッと",
+    "domain": "saqt-ai.com",
+    "tagline": "サクッと作って、しっかり届く。"
+  },
+  "company": {
+    "name": "合同会社FOMUS",
+    "email": "info@fomus.co.jp",
+    "phone": "",
+    "website": "https://saqt-ai.com",
+    "representative": ""
+  },
+  "targets": {
+    "beauty_clinic": {
+      "label": "美容クリニック",
+      "search_queries": [
+        "美容クリニック {area}",
+        "美容皮膚科 {area}",
+        "美容外科 {area}"
+      ]
+    },
+    "dental": {
+      "label": "歯科医院",
+      "search_queries": [
+        "歯科医院 {area}",
+        "歯医者 {area}",
+        "インプラント {area}",
+        "矯正歯科 {area}"
+      ]
+    },
+    "restaurant": {
+      "label": "飲食店",
+      "search_queries": [
+        "レストラン {area}",
+        "居酒屋 {area}",
+        "カフェ {area}"
+      ]
+    },
+    "salon": {
+      "label": "美容室・サロン",
+      "search_queries": [
+        "美容室 {area}",
+        "ヘアサロン {area}",
+        "ネイルサロン {area}",
+        "エステサロン {area}"
+      ]
+    },
+    "realestate": {
+      "label": "不動産",
+      "search_queries": [
+        "不動産 {area}",
+        "賃貸 {area}",
+        "不動産会社 {area}"
+      ]
+    },
+    "legal": {
+      "label": "士業（弁護士・税理士等）",
+      "search_queries": [
+        "弁護士 {area}",
+        "税理士 {area}",
+        "司法書士 {area}",
+        "行政書士 {area}"
+      ]
+    },
+    "gym": {
+      "label": "ジム・フィットネス",
+      "search_queries": [
+        "パーソナルジム {area}",
+        "フィットネス {area}",
+        "ヨガスタジオ {area}"
+      ]
+    },
+    "custom": {
+      "label": "カスタム（手入力）",
+      "search_queries": []
+    }
+  },
+  "plans": {
+    "light": {
+      "name": "ライト",
+      "price": 200000,
+      "subsidy_price": 70000,
+      "content": "HP制作（5P）+ レスポンシブ + SEO基本 + 問い合わせフォーム",
+      "multilingual": "なし",
+      "value_message": "Webの名刺として。ネット検索からの信頼獲得に"
+    },
+    "standard": {
+      "name": "スタンダード",
+      "price": 500000,
+      "subsidy_price": 170000,
+      "content": "ライト全機能 + 全ページ刷新 + 集客導線設計 + コンテンツ企画 + SNS連携",
+      "multilingual": "2言語追加",
+      "value_message": "問い合わせ月5件増で、年間売上数百万円アップも"
+    },
+    "pro": {
+      "name": "プロ",
+      "price": 1000000,
+      "subsidy_price": 500000,
+      "content": "スタンダード全機能 + チャットボット + 予約自動化 + MEO + 競合分析 + 月次レポート",
+      "multilingual": "3言語〜",
+      "value_message": "チャットボット・多言語・MEOまで全部入り。Web戦略が完成"
+    }
+  },
+  "maintenance_monthly": {
+    "minimum": {
+      "name": "ミニマム保守",
+      "price": 10000
+    },
+    "light": {
+      "name": "ライト保守",
+      "price": 30000
+    },
+    "standard": {
+      "name": "スタンダード保守（チャットボット運用込み）",
+      "price": 50000
+    },
+    "full": {
+      "name": "フル保守（MEO・月次レポート込み）",
+      "price": 100000
+    }
+  },
+  "campaign": {
+    "chatbot_free": {
+      "description": "4月末までにご依頼で AIチャットボット無料導入",
+      "deadline": "2026-04-30"
+    }
+  },
+  "areas": [
+    "渋谷区", "新宿区", "港区", "目黒区", "世田谷区",
+    "品川区", "中央区", "千代田区", "文京区", "豊島区",
+    "横浜市", "川崎市", "大宮", "船橋", "柏"
+  ],
+  "scoring": {
+    "mobile_responsive": 30,
+    "modern_design": 25,
+    "booking_ease": 20,
+    "page_speed": 15,
+    "content_structure": 10
+  },
+  "subsidy": {
+    "monodzukuri": {
+      "name": "ものづくり補助金",
+      "max_amount": 7500000,
+      "coverage_rate": 0.5,
+      "note": "事業者が直接申請。ベンダー登録不要"
+    },
+    "small_business": {
+      "name": "小規模事業者持続化補助金",
+      "max_amount": 2000000,
+      "coverage_rate": 0.66,
+      "note": "販路開拓としてWeb制作が対象。ベンダー登録不要"
+    }
+  }
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{CLINIC_NAME}} | 公式サイト</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>{{CLINIC_NAME}}</h1>
+            </div>
+            <nav class="nav" id="nav">
+                <a href="#about">当院の特徴</a>
+                <a href="#treatment">診療案内</a>
+                <a href="#doctor">院長紹介</a>
+                <a href="#access">アクセス</a>
+                <a href="#contact" class="nav-cta">ご予約</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ヒーロー -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge">Dental Clinic</div>
+            <h2>歯の健康から、<br>笑顔あふれる毎日を</h2>
+            <p class="hero-desc">{{CLINIC_NAME}}は、患者様に安心して通っていただけるよう<br>痛みに配慮した丁寧な治療を心がけています。</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Web予約</a>
+                <a href="tel:{{PHONE}}" class="btn btn-outline">{{PHONE}}</a>
+            </div>
+            <div class="hero-hours">
+                <div class="hours-item">
+                    <span class="hours-label">診療時間</span>
+                    <span>{{HOURS}}</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-label">休診日</span>
+                    <span>{{HOLIDAY}}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お知らせバー -->
+    <section class="notice-bar">
+        <div class="container">
+            <p>初診の方へ：ご予約はお電話またはWeb予約フォームから承っております。お気軽にお問い合わせください。</p>
+        </div>
+    </section>
+
+    <!-- 特徴 -->
+    <section class="features" id="about">
+        <div class="container">
+            <h2 class="section-title">当院が選ばれる<span>理由</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h3>痛みに配慮した治療</h3>
+                    <p>表面麻酔の使用や電動注射器の導入など、痛みを最小限に抑える工夫を行っています。歯科治療が苦手な方もご安心ください。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h3>丁寧な説明</h3>
+                    <p>治療前にしっかりとご説明し、患者様にご納得いただいてから治療を始めます。分からないことは何でもお聞きください。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h3>予防歯科に注力</h3>
+                    <p>「治す」だけでなく「守る」歯科医療を。定期的なメンテナンスで、生涯にわたって健康な歯を維持するサポートをします。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <h3>清潔な院内環境</h3>
+                    <p>最新の滅菌設備を完備。器具の徹底した消毒と、院内の衛生管理を行い、安心・安全な環境をご提供しています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 診療案内 -->
+    <section class="treatment" id="treatment">
+        <div class="container">
+            <h2 class="section-title">診療<span>案内</span></h2>
+            <div class="treatment-grid">
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 8v4l3 3"></path></svg>
+                    </div>
+                    <h3>一般歯科</h3>
+                    <p>虫歯治療・歯周病治療・根管治療など。できるだけ歯を残す治療を心がけています。</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </div>
+                    <h3>小児歯科</h3>
+                    <p>お子様が歯医者を好きになれるよう、優しく楽しい雰囲気の中で治療を行います。</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <h3>審美歯科</h3>
+                    <p>ホワイトニング・セラミック治療・ラミネートベニアなど、美しい口元を実現します。</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    </div>
+                    <h3>矯正歯科</h3>
+                    <p>目立ちにくいマウスピース矯正にも対応。大人の矯正もお気軽にご相談ください。</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3>インプラント</h3>
+                    <p>失った歯を自然な見た目と噛み心地で補います。CT撮影による精密な診断を行います。</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    </div>
+                    <h3>予防歯科</h3>
+                    <p>定期検診・クリーニング・フッ素塗布など。虫歯や歯周病を未然に防ぎます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 院長紹介 -->
+    <section class="doctor" id="doctor">
+        <div class="container">
+            <h2 class="section-title">院長<span>紹介</span></h2>
+            <div class="doctor-card">
+                <div class="doctor-image">
+                    <div class="doctor-placeholder">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                </div>
+                <div class="doctor-info">
+                    <p class="doctor-role">院長</p>
+                    <h3>{{DOCTOR_NAME}}</h3>
+                    <div class="doctor-message">
+                        <p>当院では「患者様の歯を一生守る」をモットーに、予防を重視した歯科医療を提供しております。お口のことでお悩みがありましたら、些細なことでもお気軽にご相談ください。</p>
+                    </div>
+                    <div class="doctor-career">
+                        <h4>経歴</h4>
+                        <ul>
+                            <li>歯学博士</li>
+                            <li>日本歯科保存学会 認定医</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 診療時間表 -->
+    <section class="schedule">
+        <div class="container">
+            <h2 class="section-title">診療<span>時間</span></h2>
+            <div class="schedule-wrapper">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th>土</th>
+                            <th class="holiday">日・祝</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="time-label">9:00〜13:00</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td class="holiday">−</td>
+                        </tr>
+                        <tr>
+                            <td class="time-label">14:30〜18:00</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td>○</td>
+                            <td>−</td>
+                            <td>○</td>
+                            <td>△</td>
+                            <td class="holiday">−</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="schedule-note">△ 土曜午後は14:00〜17:00　※最終受付は診療終了30分前</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- アクセス -->
+    <section class="access" id="access">
+        <div class="container">
+            <h2 class="section-title">アクセス</h2>
+            <div class="access-grid">
+                <div class="access-info">
+                    <table class="info-table">
+                        <tr><th>医院名</th><td>{{CLINIC_NAME}}</td></tr>
+                        <tr><th>住所</th><td>{{ADDRESS}}</td></tr>
+                        <tr><th>電話番号</th><td><a href="tel:{{PHONE}}">{{PHONE}}</a></td></tr>
+                        <tr><th>診療時間</th><td>{{HOURS}}</td></tr>
+                        <tr><th>休診日</th><td>{{HOLIDAY}}</td></tr>
+                    </table>
+                </div>
+                <div class="access-map">
+                    <div class="map-placeholder">
+                        <p>Google Maps</p>
+                        <p class="map-address">{{ADDRESS}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>ご予約・お問い合わせ</h2>
+            <p>お電話またはWeb予約フォームよりご予約を承っております。<br>初めての方もお気軽にお問い合わせください。</p>
+            <div class="cta-buttons">
+                <a href="tel:{{PHONE}}" class="btn btn-white btn-large">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    {{PHONE}}
+                </a>
+                <a href="#" class="btn btn-white-outline btn-large">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Web予約はこちら
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h3>{{CLINIC_NAME}}</h3>
+                    <p>{{ADDRESS}}</p>
+                    <p>TEL: {{PHONE}}</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">当院の特徴</a>
+                    <a href="#treatment">診療案内</a>
+                    <a href="#doctor">院長紹介</a>
+                    <a href="#access">アクセス</a>
+                    <a href="#contact">ご予約</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; {{YEAR}} {{CLINIC_NAME}} All Rights Reserved.</p>
+            <p class="demo-badge">Demo site created by SAQT（サクッと）</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        window.addEventListener('scroll', () => {
+            document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

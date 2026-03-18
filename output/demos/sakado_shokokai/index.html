@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>坂戸市商工会 | 地域の商工業を支える</title>
+<meta name="description" content="坂戸市商工会は、商工会法により県知事の認可を得て設立された特別認可法人です。経営相談・融資・税務・共済など、地域の商工業者を支援します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50:  '#f0fbe8',
+          100: '#dcf5cc',
+          200: '#baeb9e',
+          300: '#8fdb66',
+          400: '#6bc93e',
+          500: '#339900',
+          600: '#2d8700',
+          700: '#246d00',
+          800: '#1d5700',
+          900: '#154200',
+          950: '#0c2b00'
+        },
+        warm: {
+          bg: '#faf9f7',
+          surface: '#f5f3ef'
+        }
+      },
+      fontFamily: {
+        mincho: ['"Shippori Mincho"', 'serif'],
+        sans: ['"Noto Sans JP"', 'Inter', 'Hiragino Sans', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { color: #3d4b5f; }
+  .text-heading { color: #1a2332; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hero overlay */
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 43, 0, 0.6) 0%,
+      rgba(13, 43, 0, 0.35) 40%,
+      rgba(13, 43, 0, 0.65) 100%
+    );
+  }
+
+  /* Watermark text */
+  .watermark {
+    position: absolute;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 700;
+    color: rgba(51, 153, 0, 0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 0.05em;
+    z-index: 0;
+  }
+
+  /* Accent line for section headers */
+  .section-accent::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #339900;
+    margin-bottom: 12px;
+    border-radius: 2px;
+  }
+
+  /* Card hover */
+  .service-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Mobile nav */
+  .mobile-nav {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  .mobile-nav.open {
+    transform: translateX(0);
+  }
+
+  /* News date styling */
+  .news-date {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Benefit list markers */
+  .benefit-item::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #339900;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body class="bg-[#faf9f7] font-sans antialiased">
+
+<!-- ============ HEADER ============ -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 flex-shrink-0">
+        <img src="http://www.sakado.or.jp/img/header/head_logo.jpg" alt="坂戸市商工会" class="h-10 md:h-12 w-auto">
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav aria-label="メインナビゲーション" class="hidden lg:flex items-center gap-1">
+        <a href="#about" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">商工会のご案内</a>
+        <a href="#services" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">金融情報</a>
+        <a href="#services" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">税務/経理</a>
+        <a href="#services" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">労働保険</a>
+        <a href="#services" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-600 rounded-lg hover:bg-primary-50 transition-colors">共済制度</a>
+        <a href="#contact" class="ml-2 inline-flex items-center justify-center gap-2 h-10 px-5 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer">お問い合わせ</a>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button onclick="document.getElementById('mobileNav').classList.toggle('open')" class="lg:hidden w-10 h-10 inline-flex items-center justify-center cursor-pointer" aria-label="メニューを開く">
+        <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav Drawer -->
+  <div id="mobileNav" class="mobile-nav fixed inset-y-0 right-0 w-72 bg-white shadow-md z-50 lg:hidden">
+    <div class="flex items-center justify-between p-4 border-b border-slate-200">
+      <span class="font-medium text-heading">メニュー</span>
+      <button onclick="document.getElementById('mobileNav').classList.remove('open')" class="w-10 h-10 inline-flex items-center justify-center cursor-pointer" aria-label="メニューを閉じる">
+        <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav aria-label="モバイルナビゲーション" class="p-4 flex flex-col gap-1">
+      <a href="#about" onclick="document.getElementById('mobileNav').classList.remove('open')" class="px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary-50 rounded-lg transition-colors">商工会のご案内</a>
+      <a href="#services" onclick="document.getElementById('mobileNav').classList.remove('open')" class="px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary-50 rounded-lg transition-colors">金融情報</a>
+      <a href="#services" onclick="document.getElementById('mobileNav').classList.remove('open')" class="px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary-50 rounded-lg transition-colors">税務/経理</a>
+      <a href="#services" onclick="document.getElementById('mobileNav').classList.remove('open')" class="px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary-50 rounded-lg transition-colors">労働保険</a>
+      <a href="#services" onclick="document.getElementById('mobileNav').classList.remove('open')" class="px-4 py-3 text-sm font-medium text-slate-700 hover:bg-primary-50 rounded-lg transition-colors">共済制度</a>
+      <hr class="border-t border-slate-200 my-2">
+      <a href="#contact" onclick="document.getElementById('mobileNav').classList.remove('open')" class="inline-flex items-center justify-center h-10 px-4 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer text-center">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="http://www.sakado.or.jp/img/header/head_space.jpg" alt="" class="w-full h-full object-cover object-center" aria-hidden="true" loading="eager">
+    <div class="hero-overlay absolute inset-0"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-40 lg:py-48">
+    <div class="max-w-2xl">
+      <div class="flex items-center gap-3 mb-5 reveal">
+        <span class="w-10 h-[2px] bg-primary-400"></span>
+        <span class="text-xs tracking-[0.2em] text-primary-200 uppercase font-medium">Sakado Commerce &amp; Industry Association</span>
+      </div>
+      <h1 class="font-mincho text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 reveal" style="transition-delay:100ms">
+        地域の商工業を<br>ともに支える
+      </h1>
+      <p class="text-white/80 text-base md:text-lg leading-relaxed mb-8 max-w-lg reveal" style="transition-delay:200ms">
+        金融・税務・経営等の相談から、共済制度、労働保険まで。<br class="hidden sm:block">坂戸市の事業者の皆様を総合的にサポートします。
+      </p>
+      <div class="flex flex-wrap gap-3 reveal" style="transition-delay:300ms">
+        <a href="#services" class="inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors cursor-pointer">
+          サービスを見る
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="#recruit" class="inline-flex items-center justify-center gap-2 h-12 px-6 text-base font-medium bg-white/10 text-white border border-white/30 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-colors cursor-pointer">
+          会員募集中
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS / お知らせ ============ -->
+<section id="news" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <span class="watermark top-0 -left-4 font-mincho">News</span>
+      <div class="relative z-10">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <h2 class="section-accent font-mincho text-3xl font-bold text-heading reveal">お知らせ</h2>
+            <p class="text-sm text-slate-500 mt-1 reveal" style="transition-delay:50ms">最新の情報をお届けします</p>
+          </div>
+        </div>
+
+        <!-- お知らせ一覧: microCMS APIキーが設定されていれば動的取得、なければ静的HTML表示 -->
+        <div id="news-list" class="space-y-0 divide-y divide-slate-200">
+          <!-- 静的コンテンツ（microCMS未設定時に表示） -->
+          <article class="reveal news-static flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 py-5" style="transition-delay:100ms">
+            <time class="news-date text-sm font-medium text-primary-600 flex-shrink-0 w-28">2026.01.16</time>
+            <a href="#" class="text-base text-heading hover:text-primary-600 transition-colors font-medium">坂戸市商工会新年のご挨拶</a>
+          </article>
+          <article class="reveal news-static flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 py-5" style="transition-delay:200ms">
+            <time class="news-date text-sm font-medium text-primary-600 flex-shrink-0 w-28">2025.12.02</time>
+            <a href="#" class="text-base text-heading hover:text-primary-600 transition-colors font-medium">健康診断申込書ダウンロードはこちら</a>
+          </article>
+          <article class="reveal news-static flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 py-5" style="transition-delay:300ms">
+            <time class="news-date text-sm font-medium text-primary-600 flex-shrink-0 w-28">2025.10.03</time>
+            <a href="#" class="text-base text-heading hover:text-primary-600 transition-colors font-medium">第22回さかど産業まつり特集ページ公開</a>
+          </article>
+          <article class="reveal news-static flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 py-5" style="transition-delay:400ms">
+            <time class="news-date text-sm font-medium text-primary-600 flex-shrink-0 w-28">2025.09.30</time>
+            <a href="#" class="text-base text-heading hover:text-primary-600 transition-colors font-medium">さかど街バルを開催します！</a>
+          </article>
+          <article class="reveal news-static flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 py-5" style="transition-delay:500ms">
+            <time class="news-date text-sm font-medium text-primary-600 flex-shrink-0 w-28">2025.07.25</time>
+            <a href="#" class="text-base text-heading hover:text-primary-600 transition-colors font-medium">【第11回創業塾】受講生募集のお知らせ</a>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="mt-12 reveal" style="transition-delay:200ms">
+      <a href="#" class="block rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <img src="http://www.sakado.or.jp/special/industrial_festival/2025img/banner_s.jpg" alt="第22回さかど産業まつり" class="w-full h-auto">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES / 事業・サービス ============ -->
+<section id="services" class="py-16 md:py-24 bg-[#faf9f7]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <span class="watermark -top-6 right-0 font-mincho">Service</span>
+      <div class="relative z-10">
+        <div class="text-center mb-14">
+          <h2 class="section-accent font-mincho text-3xl font-bold text-heading mx-auto inline-block reveal">事業・サービス</h2>
+          <p class="text-base text-slate-600 mt-3 max-w-xl mx-auto leading-relaxed reveal" style="transition-delay:100ms">県知事から認定された職員が、金融・税務・経営等のご相談を承ります。</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1: 金融情報 -->
+          <div class="reveal service-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm" style="transition-delay:100ms">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-mincho text-xl font-bold text-heading mb-2">金融情報</h3>
+            <p class="text-sm leading-relaxed">融資相談やマル経資金（経営改善貸付）のご案内。無担保・無保証人の公的融資制度で事業をサポートします。</p>
+          </div>
+
+          <!-- Card 2: 税務/経理 -->
+          <div class="reveal service-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm" style="transition-delay:200ms">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-mincho text-xl font-bold text-heading mb-2">税務/経理</h3>
+            <p class="text-sm leading-relaxed">確定申告、記帳指導、記帳コンピュータ処理、簿記講座など、税務・経理の各種サービスをご提供します。</p>
+          </div>
+
+          <!-- Card 3: 労働保険 -->
+          <div class="reveal service-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm" style="transition-delay:300ms">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="font-mincho text-xl font-bold text-heading mb-2">労働保険</h3>
+            <p class="text-sm leading-relaxed">労災保険・雇用保険の手続き代行を行っております。加入手続きや各種届出はお任せください。</p>
+          </div>
+
+          <!-- Card 4: 共済制度 -->
+          <div class="reveal service-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm" style="transition-delay:100ms">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            </div>
+            <h3 class="font-mincho text-xl font-bold text-heading mb-2">共済制度</h3>
+            <p class="text-sm leading-relaxed">小規模企業共済をはじめ、各種共済制度のご案内・加入相談を承ります。</p>
+          </div>
+
+          <!-- Card 5: 事業系ゴミ袋 -->
+          <div class="reveal service-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm" style="transition-delay:200ms">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            </div>
+            <h3 class="font-mincho text-xl font-bold text-heading mb-2">事業系ゴミ袋注文</h3>
+            <p class="text-sm leading-relaxed">事業系ゴミ袋のご注文を承っております。お電話またはご来所にてお申し込みください。</p>
+          </div>
+
+          <!-- Card 6: 会員サイト制作 -->
+          <div class="reveal service-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm" style="transition-delay:300ms">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-mincho text-xl font-bold text-heading mb-2">会員サイト制作サービス</h3>
+            <p class="text-sm leading-relaxed">会員様向けのWebサイト制作サービスをご提供。事業のPRやお客様への情報発信にご活用ください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 相談したいとき / 学びたいとき ============ -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+      <!-- 相談したいとき -->
+      <div class="reveal bg-[#faf9f7] rounded-xl p-8 lg:p-10">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          </div>
+          <h3 class="font-mincho text-2xl font-bold text-heading">相談したいとき</h3>
+        </div>
+        <p class="text-base leading-relaxed">金融・税務・経営等の相談を承ります。県知事から認定された職員が担当いたしますので、安心してご相談いただけます。</p>
+      </div>
+
+      <!-- 学びたいとき -->
+      <div class="reveal bg-[#faf9f7] rounded-xl p-8 lg:p-10" style="transition-delay:100ms">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <h3 class="font-mincho text-2xl font-bold text-heading">学びたいとき</h3>
+        </div>
+        <p class="text-base leading-relaxed">企業の体質強化をめざして、研修会や技術修得の機会をご提供しています。創業塾や簿記講座なども開催しております。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / 商工会について ============ -->
+<section id="about" class="py-16 md:py-24 bg-[#faf9f7]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <span class="watermark -top-6 left-0 font-mincho">About</span>
+      <div class="relative z-10 grid lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+        <!-- Left: text area (3 cols) -->
+        <div class="lg:col-span-3">
+          <h2 class="section-accent font-mincho text-3xl font-bold text-heading mb-6 reveal">商工会について</h2>
+          <p class="text-base leading-relaxed mb-8 reveal" style="transition-delay:100ms">
+            商工会は「商工会法」により県知事の認可を得て設立されている特別認可法人で、商工会の地区内において営業する商工業者の自主的な組織です。
+          </p>
+
+          <div class="space-y-4 reveal" style="transition-delay:200ms">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-heading text-sm mb-1">設立根拠</h4>
+                <p class="text-sm leading-relaxed">商工会法により県知事の認可を得て設立された特別認可法人</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-heading text-sm mb-1">会員数</h4>
+                <p class="text-sm leading-relaxed">1,586件（令和4年3月31日時点）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: member categories (2 cols) -->
+        <div class="lg:col-span-2 reveal" style="transition-delay:200ms">
+          <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+            <h3 class="font-medium text-heading text-base mb-4">会員の業種</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">サービス業 (27)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">建設業 (20)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">卸・小売業 (11)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">製造業 (10)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">医療・福祉業 (10)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">不動産業 (6)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">金融・保険業 (5)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">その他 (5)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">IT関連業 (3)</span>
+              <span class="bg-primary-50 text-primary-800 px-3 py-1.5 rounded-full text-xs font-medium">飲食業 (1)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECRUIT / 会員募集 ============ -->
+<section id="recruit" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <span class="watermark -top-6 right-0 font-mincho">Member</span>
+      <div class="relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="section-accent font-mincho text-3xl font-bold text-heading mx-auto inline-block reveal">新規会員募集中</h2>
+          <p class="text-base leading-relaxed mt-4 reveal" style="transition-delay:100ms">
+            坂戸市商工会では新規会員を募集しております。<br class="hidden sm:block">加入申込書を郵送またはFAXにてお送りください。
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-[#faf9f7] rounded-xl p-8 lg:p-10 reveal" style="transition-delay:200ms">
+            <h3 class="font-mincho text-xl font-bold text-heading mb-6">加入メリット</h3>
+            <div class="grid sm:grid-cols-2 gap-x-8 gap-y-3">
+              <div class="benefit-item flex items-center text-sm leading-relaxed">経営相談</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">巡回指導</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">マル経資金（無担保・無保証人）</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">所得税・消費税の申告相談</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">記帳コンピュータ処理</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">簿記講座</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">専門家派遣事業（無料）</div>
+              <div class="benefit-item flex items-center text-sm leading-relaxed">会員間優待サービス</div>
+            </div>
+          </div>
+
+          <div class="text-center mt-8 reveal" style="transition-delay:300ms">
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 h-12 px-8 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer">
+              入会のご相談はこちら
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACCESS / アクセス ============ -->
+<section id="access" class="py-16 md:py-24 bg-[#faf9f7]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <span class="watermark -top-6 left-0 font-mincho">Access</span>
+      <div class="relative z-10">
+        <h2 class="section-accent font-mincho text-3xl font-bold text-heading mb-10 reveal">アクセス</h2>
+
+        <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
+          <!-- Map -->
+          <div class="lg:col-span-3 reveal" style="transition-delay:100ms">
+            <div class="rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-white aspect-video">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3230.5!2d139.3883!3d35.9617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018c2c5a4a2a7a1%3A0x3b5a5a5a5a5a5a5a!2z5Z2C5oi45biC5ZWG5bel5Lya!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+                class="w-full h-full"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="坂戸市商工会の地図">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="lg:col-span-2 reveal" style="transition-delay:200ms">
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <h3 class="font-mincho text-xl font-bold text-heading mb-5">坂戸市商工会</h3>
+
+              <dl class="space-y-4 text-sm">
+                <div>
+                  <dt class="font-medium text-heading mb-1">住所</dt>
+                  <dd>〒350-0229<br>埼玉県坂戸市薬師町31-3</dd>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <dt class="font-medium text-heading mb-1">電話</dt>
+                  <dd><a href="tel:0492821331" class="text-primary-600 hover:underline">049(282)1331</a>（代）</dd>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <dt class="font-medium text-heading mb-1">FAX</dt>
+                  <dd>049(282)1302</dd>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <dt class="font-medium text-heading mb-1">営業時間</dt>
+                  <dd>8:30〜17:15</dd>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <dt class="font-medium text-heading mb-1">休業日</dt>
+                  <dd>土・日・祝・年末年始</dd>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <dt class="font-medium text-heading mb-1">アクセス</dt>
+                  <dd class="leading-relaxed">東武東上線「北坂戸駅」東口を出て直進し一つ目の信号を右折、直進し一つ目の信号を渡り左手すぐ</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT CTA ============ -->
+<section id="contact" class="py-16 md:py-24 bg-primary-900 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10" aria-hidden="true">
+    <div class="absolute top-10 left-10 w-64 h-64 rounded-full border border-white/30"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full border border-white/20"></div>
+  </div>
+  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="font-mincho text-3xl md:text-4xl font-bold text-white mb-4 reveal">お気軽にご相談ください</h2>
+    <p class="text-primary-100 text-base leading-relaxed mb-8 reveal" style="transition-delay:100ms">
+      経営・金融・税務のご相談、会員のご加入など、<br class="hidden sm:block">まずはお電話またはご来所にてお問い合わせください。
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="transition-delay:200ms">
+      <a href="tel:0492821331" class="inline-flex items-center justify-center gap-2 h-12 px-8 text-base font-medium bg-white text-primary-800 rounded-lg hover:bg-primary-50 transition-colors cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        049(282)1331
+      </a>
+      <div class="text-primary-200 text-sm">
+        受付: 平日 8:30〜17:15
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center gap-4 mt-8 reveal" style="transition-delay:300ms">
+      <a href="http://www.facebook.com/sakadoshisyoukoukai/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 inline-flex items-center justify-center transition-colors" aria-label="Facebook">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@sakado-syokokai" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 inline-flex items-center justify-center transition-colors" aria-label="YouTube">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-slate-900 text-slate-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Col 1 -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <img src="http://www.sakado.or.jp/img/header/head_logo.jpg" alt="坂戸市商工会" class="h-10 w-auto mb-4 brightness-200 contrast-50 invert">
+        <p class="text-sm leading-relaxed">〒350-0229<br>埼玉県坂戸市薬師町31-3</p>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <h4 class="text-white text-sm font-medium mb-3">サービス</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#services" class="hover:text-white transition-colors">金融情報</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">税務/経理</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">労働保険</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">共済制度</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div>
+        <h4 class="text-white text-sm font-medium mb-3">ご案内</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#about" class="hover:text-white transition-colors">商工会について</a></li>
+          <li><a href="#recruit" class="hover:text-white transition-colors">会員募集</a></li>
+          <li><a href="#news" class="hover:text-white transition-colors">お知らせ</a></li>
+          <li><a href="#access" class="hover:text-white transition-colors">アクセス</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4 -->
+      <div>
+        <h4 class="text-white text-sm font-medium mb-3">お問い合わせ</h4>
+        <p class="text-sm mb-1"><a href="tel:0492821331" class="hover:text-white transition-colors">TEL: 049(282)1331</a></p>
+        <p class="text-sm mb-3">FAX: 049(282)1302</p>
+        <p class="text-xs">平日 8:30〜17:15</p>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs">&copy; 坂戸市商工会 All Rights Reserved.</p>
+      <p class="text-xs text-slate-500">Demo site created by SAQT（サクッと）</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll Reveal Script -->
+<script>
+(function() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+})();
+</script>
+
+<!-- microCMS連携（お知らせ動的取得） -->
+<!-- 使い方: data-service-id と data-api-key を設定するだけで有効化 -->
+<script>
+(function() {
+  var MICROCMS_SERVICE_ID = ''; // 例: 'sakado-shokokai'
+  var MICROCMS_API_KEY = '';     // 例: 'xxxx-xxxx-xxxx'
+  var MICROCMS_ENDPOINT = 'news'; // microCMSのAPI名
+
+  if (!MICROCMS_SERVICE_ID || !MICROCMS_API_KEY) return; // 未設定なら静的HTMLのまま
+
+  var url = 'https://' + MICROCMS_SERVICE_ID + '.microcms.io/api/v1/' + MICROCMS_ENDPOINT + '?limit=5&orders=-publishedAt';
+
+  fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY } })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (!data.contents || data.contents.length === 0) return;
+
+      // 静的コンテンツを非表示
+      var statics = document.querySelectorAll('.news-static');
+      statics.forEach(function(el) { el.remove(); });
+
+      var container = document.getElementById('news-list');
+
+      data.contents.forEach(function(item, i) {
+        var date = new Date(item.publishedAt || item.createdAt);
+        var dateStr = date.getFullYear() + '.' +
+          String(date.getMonth() + 1).padStart(2, '0') + '.' +
+          String(date.getDate()).padStart(2, '0');
+
+        var article = document.createElement('article');
+        article.className = 'flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 py-5';
+        if (i > 0) article.style.borderTop = '1px solid #e2e8f0';
+
+        article.innerHTML =
+          '<time class="news-date text-sm font-medium text-primary-600 flex-shrink-0 w-28">' + dateStr + '</time>' +
+          '<a href="' + (item.url || '#') + '" class="text-base text-heading hover:text-primary-600 transition-colors font-medium">' +
+          (item.title || '') + '</a>';
+
+        container.appendChild(article);
+      });
+    })
+    .catch(function() { /* 取得失敗時は静的HTMLがそのまま表示される */ });
+})();
+</script>
+
+<!-- Chatbot -->
+<script src="../../../chatbot/widget/chatbot.js" data-knowledge="knowledge.json" data-primary-color="#339900" data-gemini-key=""></script>
+</body>
+</html>

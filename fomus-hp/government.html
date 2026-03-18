@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自治体サイト専門フロントエンドリニューアル｜SAQT（サクッと）</title>
+    <meta name="description" content="既存CMSを活かしたまま、自治体サイトのデザインだけをリニューアル。JIS X 8341-3準拠・レスポンシブ対応。最短3日、随意契約の範囲内で対応可能。">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="author" content="SAQT（サクッと） - 合同会社FOMUS">
+    <link rel="canonical" href="https://saqt-ai.com/government.html" />
+    <link rel="icon" type="image/png" href="images/saqt-favicon.png">
+    <!-- Open Graph -->
+    <meta property="og:title" content="自治体サイト専門リニューアル | SAQT（サクッと）">
+    <meta property="og:description" content="管理システムはそのまま。見た目だけ今の時代に。JIS X 8341-3準拠・最短3日・随意契約の範囲内。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saqt-ai.com/government.html">
+    <meta property="og:site_name" content="SAQT（サクッと）">
+    <meta property="og:locale" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="自治体サイト専門リニューアル | SAQT（サクッと）">
+    <meta name="twitter:description" content="管理システムはそのまま。見た目だけ今の時代に。JIS X 8341-3準拠・最短3日・随意契約の範囲内。">
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "SAQT（サクッと） for 自治体",
+      "alternateName": "サクッと",
+      "description": "既存CMSを活かしたまま、自治体サイトのデザインだけをリニューアル。JIS X 8341-3準拠・レスポンシブ対応。最短3日、随意契約の範囲内で対応可能。",
+      "url": "https://saqt-ai.com/government.html",
+      "logo": "https://saqt-ai.com/logo.png",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "合同会社FOMUS"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "埼玉県",
+        "addressCountry": "JP"
+      },
+      "email": "info@saqt-ai.com",
+      "priceRange": "¥200,000〜",
+      "serviceType": ["自治体サイトリニューアル", "フロントエンドリニューアル", "アクセシビリティ対応", "JIS X 8341-3準拠", "レスポンシブ対応", "多言語対応", "PDF HTML化"],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Japan"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "自治体向け料金プラン",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "ライトプラン",
+            "description": "トップページ + 主要5ページのデザイン刷新、レスポンシブ対応、基本的なアクセシビリティ対応",
+            "price": "200000",
+            "priceCurrency": "JPY"
+          },
+          {
+            "@type": "Offer",
+            "name": "スタンダードプラン",
+            "description": "全ページデザイン刷新、JIS X 8341-3 レベルAA準拠、多言語対応、サイト内検索改善",
+            "price": "500000",
+            "priceCurrency": "JPY"
+          }
+        ]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "既存のCMSに影響はありませんか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "管理画面・データベースには一切触れません。CMSの機能や設定はすべてそのまま維持されます。既存ベンダーとの契約にも影響しません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "随意契約で発注できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ライトプラン・スタンダードプランともに、多くの自治体の随意契約上限（50〜130万円）の範囲内で対応可能です。見積書・請求書など必要書類もすべてご用意します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "アクセシビリティ試験は対応していますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JIS X 8341-3 レベルAA準拠で制作します。スタンダードプランでは、アクセシビリティ対応を標準で含んでおり、障害者差別解消法への対応を実現します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "セキュリティは大丈夫ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "サーバー・データベースには一切触れないため、セキュリティリスクはありません。変更するのはHTMLテンプレートとCSSファイルのみです。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "PDFのHTML化はどの程度対応できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "お知らせ・制度案内・届出書類の説明ページなど、住民がよく閲覧するPDFを優先してHTML化します。スタンダードプランでは主要50件程度を目安に対応。スマホで読める・検索に引っかかる・アクセシビリティ準拠の三拍子が揃います。"
+          }
+        }
+      ]
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="government.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-main">SAQT</span>
+            </a>
+            <nav class="nav" id="nav">
+                <a href="#problems">よくある課題</a>
+                <a href="#proposal">SAQTの提案</a>
+                <a href="#scope">対応内容</a>
+                <a href="#pricing">料金</a>
+                <a href="#flow">ご利用の流れ</a>
+                <a href="#faq">FAQ</a>
+                <a href="#cta" class="nav-cta">無料診断を受ける</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">自治体サイト専門のフロントエンドリニューアル</span>
+                <h1>管理システムはそのまま。<br><span class="text-gradient">見た目だけ、今の時代に。</span></h1>
+                <p class="hero-lead">
+                    既存CMSを活かしたまま、デザインだけをリニューアル。<br>
+                    <strong>最短3日</strong>で、住民に使いやすいサイトへ。
+                </p>
+                <div class="hero-buttons">
+                    <a href="#cta" class="btn btn-primary btn-lg">まずは現サイトの診断を受ける（無料）</a>
+                    <a href="#proposal" class="btn btn-ghost">詳しく見る</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">打ち合わせ1回</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">最短3日</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">既存CMS対応</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">JIS X 8341-3準拠</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- よくある課題 -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-label">自治体サイトの現状</span>
+            </div>
+            <h2 class="section-title">よくある課題</h2>
+            <p class="section-sub">多くの自治体が同じ悩みを抱えています。</p>
+            <div class="problems-grid">
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <p>サイトのデザインが10年以上前のまま</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    </div>
+                    <p>スマートフォンに対応していない</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <p>アクセシビリティ基準（JIS X 8341-3）を満たしていない</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <p>フルリニューアルは数千万円の予算と年単位の期間が必要</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <p>現行CMSベンダーとの契約があり、簡単に切り替えられない</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <p>情報がPDFばかりでスマホで読めない</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <p>施設予約が電話・窓口のみで、住民にも職員にも負担</p>
+                </div>
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <p>住民からの「サイトが使いにくい」という声が増えている</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAQTの提案 -->
+    <section class="proposal" id="proposal">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-label">SAQTの提案</span>
+            </div>
+            <h2 class="section-title">フロントエンドリニューアル</h2>
+            <p class="section-sub">管理システム（CMS）には一切触れず、見た目だけを刷新する新しいアプローチ。</p>
+
+            <div class="concept-points">
+                <div class="concept-point animate-on-scroll">
+                    <div class="concept-icon orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>CMSには一切触れない</h3>
+                    <p>管理画面・データベースはそのまま。ベンダー契約にも影響しません。</p>
+                </div>
+                <div class="concept-point animate-on-scroll">
+                    <div class="concept-icon green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>テンプレート・CSSだけを刷新</h3>
+                    <p>HTMLテンプレートとCSSのみを更新。デザインだけが変わります。</p>
+                </div>
+                <div class="concept-point animate-on-scroll">
+                    <div class="concept-icon orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>更新フローはそのまま</h3>
+                    <p>職員の操作方法は一切変わりません。いつもどおり更新できます。</p>
+                </div>
+            </div>
+
+            <div class="before-after">
+                <h3 style="text-align:center; font-size:1.1rem; font-weight:700; color:#0f172a; margin-bottom:28px;">リニューアルのイメージ</h3>
+                <div class="ba-grid">
+                    <div class="ba-card ba-before animate-on-scroll">
+                        <h4>Before（現状）</h4>
+                        <ul>
+                            <li>固定幅レイアウト（PC専用）</li>
+                            <li>小さい文字、低コントラスト</li>
+                            <li>スマホで横スクロール発生</li>
+                            <li>アクセシビリティ未対応</li>
+                            <li>古いビジュアルデザイン</li>
+                        </ul>
+                    </div>
+                    <div class="ba-arrow">→</div>
+                    <div class="ba-card ba-after animate-on-scroll">
+                        <h4>After（リニューアル後）</h4>
+                        <ul>
+                            <li>レスポンシブ対応（全デバイス最適化）</li>
+                            <li>読みやすい文字サイズと配色</li>
+                            <li>スマホでも快適に閲覧</li>
+                            <li>JIS X 8341-3 レベルAA準拠</li>
+                            <li>現代的で信頼感のあるデザイン</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 対応内容 -->
+    <section class="scope" id="scope">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-label">対応内容</span>
+            </div>
+            <h2 class="section-title">フロントエンドリニューアルに含まれるもの</h2>
+            <p class="section-sub">デザイン刷新だけでなく、自治体サイトに必要な機能を包括的に対応します。</p>
+
+            <div class="scope-grid">
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    </div>
+                    <h3>レスポンシブデザイン</h3>
+                    <p>スマートフォン・タブレット完全対応。あらゆるデバイスで最適な表示を実現します。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h3>JIS X 8341-3 レベルAA準拠</h3>
+                    <p>障害者差別解消法に対応。アクセシビリティ基準を満たしたサイトを構築します。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+                    </div>
+                    <h3>文字サイズ変更・色反転機能</h3>
+                    <p>ユーザー補助機能を標準搭載。高齢者や視覚に配慮が必要な方にも対応します。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>多言語対応</h3>
+                    <p>英語・中国語・韓国語・やさしい日本語など、在住外国人・訪日観光客にも対応。翻訳から実装まで一括で対応します。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <h3>PDF → HTML変換</h3>
+                    <p>PDFでしか公開されていない情報をHTML化。スマホで読める・検索に引っかかる・アクセシビリティ準拠に。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <h3>施設予約のオンライン化</h3>
+                    <p>公共施設の予約を電話・窓口からオンラインへ。住民の利便性向上と窓口業務の削減を同時に実現。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                    <h3>サイト内検索の改善</h3>
+                    <p>住民が必要な情報に素早くたどり着ける、使いやすい検索機能を実装します。</p>
+                </div>
+                <div class="scope-card animate-on-scroll">
+                    <div class="scope-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    </div>
+                    <h3>パンくずリスト・サイトマップ</h3>
+                    <p>サイト構造を整理し、ナビゲーションを改善。回遊性を高めます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金 -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-label">料金プラン</span>
+            </div>
+            <h2 class="section-title">随意契約の範囲内で対応可能</h2>
+            <p class="section-sub">多くの自治体で随意契約の上限となる50〜130万円の範囲内で対応できます。</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card animate-on-scroll">
+                    <div class="pricing-header">
+                        <h3>ライト</h3>
+                        <p class="pricing-desc">トップページ + 主要5ページのデザイン刷新</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-num">20<small>万円〜</small></span>
+                        <span class="price-tax">税別</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>トップページのデザイン刷新</li>
+                        <li>主要5ページのデザイン刷新</li>
+                        <li>レスポンシブ対応</li>
+                        <li>基本的なアクセシビリティ対応</li>
+                        <li>納品後の修正対応（1回）</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-ghost">まずは無料診断</a>
+                </div>
+                <div class="pricing-card recommended animate-on-scroll">
+                    <span class="recommended-badge">おすすめ</span>
+                    <div class="pricing-header">
+                        <h3>スタンダード</h3>
+                        <p class="pricing-desc">全ページデザイン刷新 + アクセシビリティ対応</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-num">50<small>万円〜</small></span>
+                        <span class="price-tax">税別</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>全ページのデザイン刷新</li>
+                        <li>JIS X 8341-3 レベルAA準拠</li>
+                        <li>レスポンシブ対応</li>
+                        <li>文字サイズ変更・色反転機能</li>
+                        <li>多言語対応（英語・中国語・韓国語等）</li>
+                        <li>サイト内検索の改善</li>
+                        <li>パンくずリスト・サイトマップ整備</li>
+                        <li>納品後の修正対応（3回）</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-primary">無料診断を受ける</a>
+                </div>
+            </div>
+
+            <div class="pricing-notes">
+                <div class="pricing-note animate-on-scroll">
+                    <div class="pricing-note-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <p><strong>随意契約で発注可能。</strong>ライト・スタンダードプランともに、多くの自治体の随意契約上限の範囲内です。</p>
+                </div>
+                <div class="pricing-note animate-on-scroll">
+                    <div class="pricing-note-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <p><strong>補助金・交付金の活用もご提案可能。</strong>デジタル田園都市国家構想交付金など、活用できる制度をご案内します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ご利用の流れ -->
+    <section class="flow" id="flow">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-label">ご利用の流れ</span>
+            </div>
+            <h2 class="section-title">担当者様の負担を最小限に</h2>
+            <p class="section-sub">すべてこちらで対応します。必要なのはURLの送付だけです。</p>
+
+            <div class="flow-grid">
+                <div class="flow-step animate-on-scroll">
+                    <div class="flow-num">1</div>
+                    <h3>現サイトの無料診断</h3>
+                    <p>URLをお送りいただくだけ。デザイン・アクセシビリティ・レスポンシブ対応の現状を診断します。</p>
+                    <span class="flow-note">URL送付のみ</span>
+                </div>
+                <div class="flow-arrow animate-on-scroll">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <div class="flow-step animate-on-scroll">
+                    <div class="flow-num">2</div>
+                    <h3>デザイン案のご提示</h3>
+                    <p>診断結果をもとに、リニューアル後のデザイン案を無料でお作りします。</p>
+                    <span class="flow-note">無料</span>
+                </div>
+                <div class="flow-arrow animate-on-scroll">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <div class="flow-step animate-on-scroll">
+                    <div class="flow-num">3</div>
+                    <h3>ご発注・制作</h3>
+                    <p>デザイン案にご納得いただけたら制作開始。最短3日で完成します。</p>
+                    <span class="flow-note">最短3日</span>
+                </div>
+                <div class="flow-arrow animate-on-scroll">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <div class="flow-step animate-on-scroll">
+                    <div class="flow-num">4</div>
+                    <h3>納品・公開</h3>
+                    <p>テンプレートファイルを納品。既存CMSへの適用をサポートします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-label">よくあるご質問</span>
+            </div>
+            <h2 class="section-title">FAQ</h2>
+            <p class="section-sub">自治体の担当者様からよくいただくご質問にお答えします。</p>
+
+            <div class="faq-list">
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>既存のCMSに影響はありませんか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>管理画面・データベースには一切触れません。CMSの機能や設定はすべてそのまま維持されます。既存ベンダーとの契約にも影響しません。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>職員の操作方法は変わりますか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>更新作業はこれまでとまったく同じです。管理画面の操作方法、記事の投稿・編集方法に変更はありません。職員向けの再研修も不要です。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>随意契約で発注できますか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>ライトプラン・スタンダードプランともに、多くの自治体の随意契約上限（50〜130万円）の範囲内で対応可能です。見積書・請求書など必要書類もすべてご用意します。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>アクセシビリティ試験は対応していますか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>JIS X 8341-3 レベルAA準拠で制作します。スタンダードプランでは、アクセシビリティ対応を標準で含んでおり、障害者差別解消法への対応を実現します。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>多言語対応はどこまでできますか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>英語・中国語（簡体字/繁体字）・韓国語・ポルトガル語・やさしい日本語など、主要言語に対応しています。翻訳・ページ構築・言語切替機能の実装まで一括で対応します。在住外国人が多い自治体では特にご好評いただいています。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>PDFのHTML化はどの程度対応できますか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>お知らせ・制度案内・届出書類の説明ページなど、住民がよく閲覧するPDFを優先してHTML化します。スタンダードプランでは主要50件程度を目安に対応。スマホで読める・検索に引っかかる・アクセシビリティ準拠の三拍子が揃います。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-badge">Q</span>
+                        <span>セキュリティは大丈夫ですか？</span>
+                        <span class="faq-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <span class="faq-a-badge">A</span>
+                            <p>サーバー・データベースには一切触れないため、セキュリティリスクはありません。変更するのはHTMLテンプレートとCSSファイルのみです。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="cta">
+        <div class="cta-content container">
+            <h2>まずは現サイトの<span class="text-gradient">無料診断レポート</span>を<br>お送りします。</h2>
+            <p>URLをお知らせいただくだけで、デザイン・アクセシビリティ・レスポンシブ対応の<br>現状診断レポートを無料でお送りします。</p>
+            <div style="margin-bottom:16px;">
+                <a href="mailto:info@and-fomus.com?subject=自治体サイト無料診断の申し込み&body=診断を希望するサイトURL：" class="btn btn-primary btn-lg">無料診断を申し込む</a>
+            </div>
+            <p class="cta-note">営業電話・しつこい勧誘は一切ありません。</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div class="footer-logo-wrap">
+                        <span class="footer-logo">SAQT</span>
+                        <span class="footer-logo-sub">サクッと</span>
+                    </div>
+                    <p>合同会社FOMUS</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">トップページ</a>
+                    <a href="#problems">よくある課題</a>
+                    <a href="#pricing">料金</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#cta">お問い合わせ</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 SAQT by 合同会社FOMUS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+
+    // Close nav on link click
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isActive = item.classList.contains('active');
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.faq-question').forEach(b => b.setAttribute('aria-expanded', 'false'));
+            // Open clicked if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    </script>
+
+    <!-- SAQT チャットボット -->
+    <script src="../chatbot/widget/chatbot.js"
+        data-knowledge="govt-knowledge.json"
+        data-primary-color="#f97316"
+        data-gemini-key=""
+    ></script>
+
+</body>
+</html>

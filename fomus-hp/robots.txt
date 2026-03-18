@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://saqt-ai.com/sitemap.xml
