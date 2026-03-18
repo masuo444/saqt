@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terroir HUB - 味を生む背景を、世界と言葉でつなぐ</title>
+<meta name="description" content="写真と商品情報を送るだけで、味やこだわりが伝わる多言語AIサイトが完成。生産者の想いを世界32言語で届けます。">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50:'#e6f9f8',100:'#b3efed',200:'#80e5e2',300:'#4ddbd7',400:'#26d4cf',
+          500:'#0abab5',600:'#09a8a3',700:'#078d89',800:'#05726f',900:'#045755',950:'#023b3a'
+        },
+        wf: { bg:'#FFFFFF', surface:'#F5F5F5', border:'#E0E0E0', text:'#333333', 'text-sub':'#888888', accent:'#666666' }
+      },
+      fontFamily: {
+        serif: ['Shippori Mincho', 'serif'],
+        sans: ['Noto Sans JP', 'Inter', 'Hiragino Sans', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans JP', sans-serif; color: #3d4b5f; }
+  .font-serif { font-family: 'Shippori Mincho', serif; }
+  .text-body { color: #3d4b5f; }
+  .bg-warm { background-color: #faf9f7; }
+  .watermark {
+    position: absolute;
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    color: rgba(10, 186, 181, 0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 0.05em;
+  }
+  .accent-line {
+    width: 48px;
+    height: 2px;
+    background-color: #0abab5;
+  }
+  .accent-line-v {
+    width: 2px;
+    height: 48px;
+    background-color: #0abab5;
+  }
+  .hero-gradient {
+    background: linear-gradient(160deg, #faf9f7 0%, #e6f9f8 50%, #faf9f7 100%);
+  }
+  .stat-number {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #0abab5;
+    line-height: 1;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .chat-bubble {
+    position: relative;
+    border-radius: 16px 16px 16px 4px;
+  }
+  .chat-bubble-user {
+    border-radius: 16px 16px 4px 16px;
+  }
+</style>
+</head>
+<body class="bg-warm min-h-screen antialiased">
+
+<!-- ═══════════════════════════════════════════════ NAVIGATION ═══════════════════════════════════════════════ -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#faf9f7]/90 backdrop-blur-md border-b border-slate-200/60">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <div class="flex items-center gap-2">
+        <span class="font-serif text-xl md:text-2xl font-bold text-slate-900 tracking-wide">Terroir HUB</span>
+        <span class="hidden sm:inline text-xs text-body tracking-wider ml-2 opacity-60">Powered by FOMUS</span>
+      </div>
+      <nav aria-label="メインナビゲーション" class="hidden lg:flex items-center gap-8">
+        <a href="#service" class="text-sm font-medium text-body hover:text-primary-500 transition-colors">サービス概要</a>
+        <a href="#ai-features" class="text-sm font-medium text-body hover:text-primary-500 transition-colors">AIサクラ</a>
+        <a href="#story" class="text-sm font-medium text-body hover:text-primary-500 transition-colors">ストーリー</a>
+        <a href="#scenes" class="text-sm font-medium text-body hover:text-primary-500 transition-colors">活用シーン</a>
+        <a href="https://www.terroirhub.com/" class="text-sm font-medium text-body hover:text-primary-500 transition-colors" target="_blank">TerroirHUB</a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 h-10 px-5 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer">無料相談する</a>
+      </nav>
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="lg:hidden w-10 h-10 inline-flex items-center justify-center cursor-pointer" aria-label="メニューを開く">
+        <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden lg:hidden bg-[#faf9f7] border-t border-slate-200/60 pb-4">
+    <nav aria-label="モバイルナビゲーション" class="px-6 pt-4 flex flex-col gap-3">
+      <a href="#service" class="text-sm font-medium text-body py-2">サービス概要</a>
+      <a href="#ai-features" class="text-sm font-medium text-body py-2">AIサクラ</a>
+      <a href="#story" class="text-sm font-medium text-body py-2">ストーリー</a>
+      <a href="#scenes" class="text-sm font-medium text-body py-2">活用シーン</a>
+      <a href="https://www.terroirhub.com/" class="text-sm font-medium text-body py-2" target="_blank">TerroirHUB</a>
+      <a href="#contact" class="inline-flex items-center justify-center gap-2 h-10 px-5 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer mt-2">無料相談する</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════ HERO ═══════════════════════════════════════════════ -->
+<section class="hero-gradient relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-32">
+  <div class="watermark top-20 -left-12 -rotate-6">Terroir</div>
+  <div class="watermark bottom-10 right-0 rotate-3">HUB</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+      <div class="md:col-span-7 relative">
+        <div class="accent-line mb-6"></div>
+        <p class="text-sm font-medium tracking-widest text-primary-500 mb-4 uppercase">Terroir HUB</p>
+        <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-snug md:leading-tight mb-6">
+          味を生む背景を、<br>
+          <span class="text-primary-500">世界と言葉</span>でつなぐ
+        </h1>
+        <p class="text-base md:text-lg text-body leading-relaxed mb-4 max-w-xl" style="line-height: 2;">
+          写真と商品情報を送るだけで、<br class="hidden md:inline">
+          "味"や"こだわり"が伝わる多言語サイトが完成。<br class="hidden md:inline">
+          生産者の想いを世界32言語で届けます。
+        </p>
+        <p class="text-sm text-body opacity-70 mb-8 max-w-xl" style="line-height: 1.8;">
+          Terroir HUBは、訪日観光客や海外バイヤーとの接客をサポートします。<br>
+          "言葉の壁"がなくなれば、感動はもっと深くなる。
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 h-12 px-8 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer shadow-sm">
+            無料相談する
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#service" class="inline-flex items-center justify-center gap-2 h-12 px-8 text-base font-medium bg-white text-slate-700 border border-slate-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">サービス概要を見る</a>
+        </div>
+      </div>
+      <div class="md:col-span-5 relative">
+        <div class="relative ml-auto" style="max-width: 380px;">
+          <div class="absolute -top-4 -left-4 w-full h-full bg-primary-50 rounded-2xl"></div>
+          <img src="https://about.terroirhub.com/sakura.png" alt="AIサクラ" class="relative z-10 w-full rounded-2xl">
+          <div class="absolute -bottom-6 -right-6 bg-white rounded-xl border border-slate-200 shadow-sm p-4 z-20">
+            <p class="text-xs text-body opacity-70 mb-1">対応言語数</p>
+            <p class="stat-number text-3xl">32</p>
+            <p class="text-xs text-primary-500 font-medium">Languages</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ STATS BAR ═══════════════════════════════════════════════ -->
+<section class="bg-white border-y border-slate-200">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-10 md:py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+      <div class="flex items-center gap-5 animate-on-scroll">
+        <div class="stat-number">32</div>
+        <div>
+          <p class="text-sm font-medium text-slate-900">言語対応</p>
+          <p class="text-xs text-body opacity-70">世界中のお客様に</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-5 animate-on-scroll">
+        <div class="stat-number">7</div>
+        <div>
+          <p class="text-sm font-medium text-slate-900">最短7日で完成</p>
+          <p class="text-xs text-body opacity-70">営業日</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-5 animate-on-scroll">
+        <div class="stat-number">24h</div>
+        <div>
+          <p class="text-sm font-medium text-slate-900">24時間対応</p>
+          <p class="text-xs text-body opacity-70">機会損失ゼロの接客体制</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SERVICE OVERVIEW ═══════════════════════════════════════════════ -->
+<section id="service" class="relative overflow-hidden py-20 md:py-28">
+  <div class="watermark top-0 left-0 -rotate-3">Terroir</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="grid md:grid-cols-12 gap-12 items-start">
+      <!-- Left: offset heading -->
+      <div class="md:col-span-5 md:sticky md:top-28 animate-on-scroll">
+        <div class="accent-line mb-6"></div>
+        <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">About</p>
+        <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 leading-snug mb-4">
+          Terroir HUBとは？
+        </h2>
+        <div class="accent-line-v ml-1 my-4"></div>
+        <p class="text-sm text-body leading-loose" style="line-height: 2;">
+          Terroir HUB（テロワール・ハブ）は、日本各地の酒蔵・蒸留所・工芸品など、地域に根ざした「テロワール（風土）」を持つ商品や体験を、"世界に伝える"ことを目的としたデジタルプラットフォームです。
+        </p>
+      </div>
+      <!-- Right: service cards -->
+      <div class="md:col-span-7 space-y-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base font-medium text-slate-900 mb-2">多言語サイト制作（最短7日）</h3>
+              <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">写真と商品情報を送るだけで、世界中の言語に対応したブランド専用ページが完成。これまで言語の壁や情報不足で失われていた「海外販売のチャンス」を、デジタルの力でゼロにします。</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base font-medium text-slate-900 mb-2">AIサクラ（チャットボット）</h3>
+              <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">商品知識と企業情報をカスタマイズ。32言語で24時間、お客様のどんな質問にも正確で分かりやすい回答を提供します。</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base font-medium text-slate-900 mb-2">QRコード連携</h3>
+              <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">商品ラベルや店頭POP、酒蔵内の案内パネル、海外の展示会など。QRコードでどこからでもブランドページにアクセスでき、接客の自動化を実現します。</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base font-medium text-slate-900 mb-2">24時間対応の接客自動化</h3>
+              <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">深夜や休日の問い合わせも逃さず対応。機会損失ゼロの営業体制で、訪れるすべてのお客様を確実にファンに変えます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ FLOW ═══════════════════════════════════════════════ -->
+<section class="bg-white relative overflow-hidden py-20 md:py-28">
+  <div class="watermark top-8 right-0 rotate-2">Flow</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="text-center mb-16 animate-on-scroll">
+      <div class="accent-line mx-auto mb-6"></div>
+      <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">Process</p>
+      <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">最短7日で完成</h2>
+      <p class="text-sm text-body opacity-70">シンプルなステップで、あなたのブランドを世界へ</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4">
+      <!-- Step 1 -->
+      <div class="relative animate-on-scroll">
+        <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center">
+          <div class="w-12 h-12 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-sm font-medium flex-shrink-0">1</div>
+          <div class="hidden md:block w-full h-0.5 bg-slate-200 my-4 relative">
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary-200 rounded-full"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-slate-900 mb-1">オンライン相談（無料）</h3>
+            <p class="text-xs text-body opacity-70">30分でニーズを明確化</p>
+          </div>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="relative animate-on-scroll">
+        <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center">
+          <div class="w-12 h-12 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-sm font-medium flex-shrink-0">2</div>
+          <div class="hidden md:block w-full h-0.5 bg-slate-200 my-4 relative">
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary-200 rounded-full"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-slate-900 mb-1">写真＋Excelテンプレート提出</h3>
+            <p class="text-xs text-body opacity-70">簡単なフォーマットで情報整理</p>
+          </div>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="relative animate-on-scroll">
+        <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center">
+          <div class="w-12 h-12 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-sm font-medium flex-shrink-0">3</div>
+          <div class="hidden md:block w-full h-0.5 bg-slate-200 my-4 relative">
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary-200 rounded-full"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-slate-900 mb-1">約7営業日で仮サイト作成</h3>
+            <p class="text-xs text-body opacity-70">進捗を随時ご報告</p>
+          </div>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="relative animate-on-scroll">
+        <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center">
+          <div class="w-12 h-12 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-sm font-medium flex-shrink-0">4</div>
+          <div class="hidden md:block w-full h-0.5 bg-slate-200 my-4 relative">
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary-200 rounded-full"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-slate-900 mb-1">修正対応＆公開</h3>
+            <p class="text-xs text-body opacity-70">ご確認いただき本番環境へ</p>
+          </div>
+        </div>
+      </div>
+      <!-- Step 5 -->
+      <div class="relative animate-on-scroll">
+        <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center">
+          <div class="w-12 h-12 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-sm font-medium flex-shrink-0">5</div>
+          <div class="hidden md:block w-full h-0.5 bg-primary-500 my-4 relative">
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary-500 rounded-full"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-slate-900 mb-1">AIソムリエ・QR運用開始</h3>
+            <p class="text-xs text-body opacity-70">24時間体制でサポート開始</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ AI SAKURA ═══════════════════════════════════════════════ -->
+<section id="ai-features" class="relative overflow-hidden py-20 md:py-28">
+  <div class="watermark bottom-0 left-0 rotate-6">Sakura</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="text-center mb-16 animate-on-scroll">
+      <div class="accent-line mx-auto mb-6"></div>
+      <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">Core Technology</p>
+      <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">AIサクラ（チャットボット）</h2>
+      <p class="text-sm text-body opacity-70 max-w-2xl mx-auto" style="line-height: 1.8;">商品知識と貴社の想いを完璧に理解し、全言語で対応する次世代チャットボット</p>
+    </div>
+
+    <!-- Two-column: Features + Chat demo -->
+    <div class="grid md:grid-cols-12 gap-12 items-start">
+      <!-- Left: Feature blocks -->
+      <div class="md:col-span-7 space-y-12">
+        <!-- Feature block 1 -->
+        <div class="animate-on-scroll">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-slate-900">商品の基礎知識を完全網羅</h3>
+          </div>
+          <p class="text-sm text-body leading-relaxed ml-13 mb-4" style="line-height: 1.8; margin-left: 52px;">
+            食品、工芸品、地域特産品など、あらゆる商品に関する専門知識を学習済み。お客様のどんな質問にも、正確で分かりやすい回答を提供します。
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 ml-13" style="margin-left: 52px;">
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+              <p class="text-xs font-medium text-primary-500 mb-1">豊富な知識DB</p>
+              <p class="text-xs text-body opacity-70">製造方法、原料、歴史、文化的背景まで幅広くカバー</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+              <p class="text-xs font-medium text-primary-500 mb-1">32言語対応</p>
+              <p class="text-xs text-body opacity-70">専門用語も含めて正確な翻訳で対応</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+              <p class="text-xs font-medium text-primary-500 mb-1">24時間即座に回答</p>
+              <p class="text-xs text-body opacity-70">時間を問わず、瞬時に専門的な回答</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature block 2 -->
+        <div class="animate-on-scroll">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-slate-900">貴社専用にカスタマイズ</h3>
+          </div>
+          <p class="text-sm text-body leading-relaxed mb-4" style="line-height: 1.8; margin-left: 52px;">
+            貴社の商品情報、企業理念、歴史、こだわりを深く学習。まるで貴社のスタッフのように、お客様との対話を行います。
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" style="margin-left: 52px;">
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+              <p class="text-xs font-medium text-primary-500 mb-1">企業情報の完全習得</p>
+              <p class="text-xs text-body opacity-70">創業の歴史、こだわり、製造プロセスまで</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+              <p class="text-xs font-medium text-primary-500 mb-1">全商品の詳細把握</p>
+              <p class="text-xs text-body opacity-70">味わい、製法、ペアリング提案まで最適化</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+              <p class="text-xs font-medium text-primary-500 mb-1">パーソナライズ提案</p>
+              <p class="text-xs text-body opacity-70">お客様の好みに合わせて最適な商品を推薦</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Chat UI demo -->
+      <div class="md:col-span-5 animate-on-scroll">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden sticky top-28">
+          <!-- Chat header -->
+          <div class="bg-primary-500 px-5 py-4 flex items-center gap-3">
+            <img src="https://about.terroirhub.com/sakura.png" alt="AIサクラ" class="w-10 h-10 rounded-full bg-white p-0.5">
+            <div>
+              <p class="text-sm font-medium text-white">AIサクラ</p>
+              <p class="text-xs text-primary-100 flex items-center gap-1">
+                <span class="w-2 h-2 bg-emerald-300 rounded-full inline-block"></span>
+                オンライン
+              </p>
+            </div>
+          </div>
+          <!-- Chat messages -->
+          <div class="p-5 space-y-4 bg-gray-50">
+            <!-- User message -->
+            <div class="flex justify-end">
+              <div class="chat-bubble-user bg-primary-500 text-white px-4 py-3 max-w-[80%]">
+                <p class="text-sm">精米歩合って何ですか？</p>
+              </div>
+            </div>
+            <!-- Bot reply JP -->
+            <div class="flex justify-start gap-2">
+              <img src="https://about.terroirhub.com/sakura.png" alt="AIサクラ" class="w-7 h-7 rounded-full flex-shrink-0 mt-1">
+              <div class="chat-bubble bg-white border border-slate-200 px-4 py-3 max-w-[85%] shadow-sm">
+                <p class="text-sm text-body" style="line-height: 1.7;">精米歩合とは、玄米を削って残った部分の割合です。60%なら40%削った状態で、数値が低いほど高級酒とされます。</p>
+              </div>
+            </div>
+            <!-- User message EN -->
+            <div class="flex justify-end">
+              <div class="chat-bubble-user bg-primary-500 text-white px-4 py-3 max-w-[80%]">
+                <p class="text-sm">What is rice polishing ratio?</p>
+              </div>
+            </div>
+            <!-- Bot reply EN -->
+            <div class="flex justify-start gap-2">
+              <img src="https://about.terroirhub.com/sakura.png" alt="AIサクラ" class="w-7 h-7 rounded-full flex-shrink-0 mt-1">
+              <div class="chat-bubble bg-white border border-slate-200 px-4 py-3 max-w-[85%] shadow-sm">
+                <p class="text-sm text-body" style="line-height: 1.7;">Rice polishing ratio is the percentage of grain remaining after milling. Lower numbers indicate higher quality sake.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Chat input mock -->
+          <div class="px-5 py-3 border-t border-slate-200 bg-white flex items-center gap-2">
+            <div class="flex-1 px-3 py-2 text-sm text-body opacity-40 bg-gray-50 rounded-lg border border-slate-200">メッセージを入力...</div>
+            <div class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ BENEFITS ═══════════════════════════════════════════════ -->
+<section class="bg-white relative overflow-hidden py-20 md:py-28">
+  <div class="watermark top-4 right-0 -rotate-2">Value</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="text-center mb-16 animate-on-scroll">
+      <div class="accent-line mx-auto mb-6"></div>
+      <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">Benefits</p>
+      <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">導入すると、こんな未来が<br class="md:hidden">待っています</h2>
+      <p class="text-sm text-body opacity-70">たった一つのシステムで、売上向上と顧客満足度の両方を実現</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-[#faf9f7] rounded-xl border border-slate-200 p-8 shadow-sm animate-on-scroll">
+        <div class="stat-number mb-2">3x</div>
+        <p class="text-xs text-body opacity-70 mb-4">海外顧客からの問い合わせ増加</p>
+        <h3 class="font-serif text-lg font-bold text-slate-900 mb-3">売上の劇的向上</h3>
+        <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">言葉の壁がなくなることで、これまで逃していた海外顧客を確実に獲得。深夜や休日の問い合わせも逃さず、売上チャンスを最大化します。</p>
+      </div>
+      <div class="bg-[#faf9f7] rounded-xl border border-slate-200 p-8 shadow-sm animate-on-scroll">
+        <div class="stat-number mb-2">95%</div>
+        <p class="text-xs text-body opacity-70 mb-4">顧客の質問解決率</p>
+        <h3 class="font-serif text-lg font-bold text-slate-900 mb-3">顧客満足度の飛躍的改善</h3>
+        <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">お客様が知りたい情報を、その場で、その言語で、正確に提供。「もっと知りたかったのに...」という残念な体験を完全に解消します。</p>
+      </div>
+      <div class="bg-[#faf9f7] rounded-xl border border-slate-200 p-8 shadow-sm animate-on-scroll">
+        <div class="stat-number mb-2">32</div>
+        <p class="text-xs text-body opacity-70 mb-4">対応可能な言語数</p>
+        <h3 class="font-serif text-lg font-bold text-slate-900 mb-3">競合他社との圧倒的差別化</h3>
+        <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">他の酒蔵にはない最先端技術で、お客様に「特別感」を提供。インバウンド市場で確実に頭一つ抜け出せます。</p>
+      </div>
+    </div>
+
+    <!-- Before / After -->
+    <div class="mt-16 grid md:grid-cols-2 gap-6 animate-on-scroll">
+      <div class="bg-gray-50 rounded-xl border border-slate-200 p-8 shadow-sm">
+        <h4 class="font-serif text-base font-bold text-slate-900 mb-4">導入前の現実</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-body"><span class="text-red-400 flex-shrink-0 mt-0.5">&#x2715;</span>外国人観光客との会話に四苦八苦</li>
+          <li class="flex items-start gap-3 text-sm text-body"><span class="text-red-400 flex-shrink-0 mt-0.5">&#x2715;</span>深夜・休日の問い合わせは対応不可</li>
+          <li class="flex items-start gap-3 text-sm text-body"><span class="text-red-400 flex-shrink-0 mt-0.5">&#x2715;</span>専門用語の説明で時間がかかる</li>
+        </ul>
+      </div>
+      <div class="bg-primary-50 rounded-xl border border-primary-200 p-8 shadow-sm">
+        <h4 class="font-serif text-base font-bold text-slate-900 mb-4">導入後の劇的変化</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-body"><span class="text-primary-500 flex-shrink-0 mt-0.5">&#x2713;</span>どんな言語でも完璧にコミュニケーション</li>
+          <li class="flex items-start gap-3 text-sm text-body"><span class="text-primary-500 flex-shrink-0 mt-0.5">&#x2713;</span>24時間365日、休むことのない営業マン</li>
+          <li class="flex items-start gap-3 text-sm text-body"><span class="text-primary-500 flex-shrink-0 mt-0.5">&#x2713;</span>複雑な専門知識も瞬時に分かりやすく説明</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SCENES / JOURNEY ═══════════════════════════════════════════════ -->
+<section id="scenes" class="relative overflow-hidden py-20 md:py-28">
+  <div class="watermark top-0 right-0 -rotate-3">Journey</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="text-center mb-16 animate-on-scroll">
+      <div class="accent-line mx-auto mb-6"></div>
+      <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">Customer Journey</p>
+      <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">現地体験から始まる、<br>永続的なつながり</h2>
+      <p class="text-sm text-body opacity-70">お客様との関係は訪問で終わらない</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll relative">
+        <div class="w-8 h-8 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-xs font-medium mb-4">1</div>
+        <h3 class="text-sm font-medium text-slate-900 mb-2">現地訪問・体験</h3>
+        <p class="text-xs text-body opacity-70" style="line-height: 1.7;">蔵見学や試飲で、お客様は貴社の魅力を体感。「この酒蔵のことをもっと知りたい」</p>
+        <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-6 h-6 text-primary-300">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 6l6 6-6 6V6z"/></svg>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll relative">
+        <div class="w-8 h-8 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-xs font-medium mb-4">2</div>
+        <h3 class="text-sm font-medium text-slate-900 mb-2">帰国後も継続</h3>
+        <p class="text-xs text-body opacity-70" style="line-height: 1.7;">自国に戻っても、QRコードからいつでもアクセス。「あの酒の製法はどうなっていたっけ？」</p>
+        <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-6 h-6 text-primary-300">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 6l6 6-6 6V6z"/></svg>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll relative">
+        <div class="w-8 h-8 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-xs font-medium mb-4">3</div>
+        <h3 class="text-sm font-medium text-slate-900 mb-2">いつでも、どこでも</h3>
+        <p class="text-xs text-body opacity-70" style="line-height: 1.7;">スマートフォン一つで詳しい情報をすぐに取得。「友人にも紹介したい、商品情報を確認しよう」</p>
+        <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-6 h-6 text-primary-300">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 6l6 6-6 6V6z"/></svg>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm animate-on-scroll">
+        <div class="w-8 h-8 rounded-full bg-primary-500 text-white inline-flex items-center justify-center text-xs font-medium mb-4">4</div>
+        <h3 class="text-sm font-medium text-slate-900 mb-2">購買・拡散へ</h3>
+        <p class="text-xs text-body opacity-70" style="line-height: 1.7;">オンライン販売やSNS共有で売上・認知度向上。「この蔵の酒を注文したい」</p>
+      </div>
+    </div>
+
+    <!-- Pierre's story -->
+    <div class="bg-white rounded-xl border border-slate-200 p-8 md:p-10 shadow-sm animate-on-scroll">
+      <div class="grid md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-4">
+          <p class="text-xs font-medium tracking-widest text-primary-500 mb-2 uppercase">Scenario</p>
+          <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">フランスの愛好家<br>ピエールさんのケース</h3>
+          <p class="text-sm text-body opacity-70" style="line-height: 1.8;">一度の訪問が永続的な関係に発展するストーリー</p>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="stat-number text-3xl">1</div>
+            <span class="text-sm text-body opacity-50">回の訪問</span>
+            <svg class="w-4 h-4 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <div class="stat-number text-3xl">&infin;</div>
+            <span class="text-sm text-body opacity-50">継続的関係</span>
+          </div>
+        </div>
+        <div class="md:col-span-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-[#faf9f7] rounded-xl p-4">
+              <span class="text-xs font-medium text-primary-500">Step 1</span>
+              <p class="text-sm font-medium text-slate-900 mt-1 mb-1">現地訪問</p>
+              <p class="text-xs text-body opacity-70">日本旅行で貴蔵を見学、純米大吟醸に感動</p>
+            </div>
+            <div class="bg-[#faf9f7] rounded-xl p-4">
+              <span class="text-xs font-medium text-primary-500">Step 2</span>
+              <p class="text-sm font-medium text-slate-900 mt-1 mb-1">帰国後</p>
+              <p class="text-xs text-body opacity-70">パリの自宅でQRコードをスキャン、製法や歴史を学習</p>
+            </div>
+            <div class="bg-[#faf9f7] rounded-xl p-4">
+              <span class="text-xs font-medium text-primary-500">Step 3</span>
+              <p class="text-sm font-medium text-slate-900 mt-1 mb-1">情報収集</p>
+              <p class="text-xs text-body opacity-70">AIサクラに質問「この商品の特徴は？」 &rarr; 的確な回答</p>
+            </div>
+            <div class="bg-[#faf9f7] rounded-xl p-4">
+              <span class="text-xs font-medium text-primary-500">Step 4</span>
+              <p class="text-sm font-medium text-slate-900 mt-1 mb-1">購入・共有</p>
+              <p class="text-xs text-body opacity-70">現地の販売店に注文を依頼、SNSで友人に紹介</p>
+            </div>
+            <div class="bg-[#faf9f7] rounded-xl p-4 sm:col-span-2 lg:col-span-2">
+              <span class="text-xs font-medium text-primary-500">Step 5</span>
+              <p class="text-sm font-medium text-slate-900 mt-1 mb-1">拡散効果</p>
+              <p class="text-xs text-body opacity-70">友人たちも興味を持ち、次回の日本旅行で蔵訪問を計画</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ STORY ═══════════════════════════════════════════════ -->
+<section id="story" class="bg-white relative overflow-hidden py-20 md:py-28">
+  <div class="watermark top-0 left-0 rotate-3">Story</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="grid md:grid-cols-12 gap-12 items-start">
+      <!-- Profile column -->
+      <div class="md:col-span-4 animate-on-scroll">
+        <div class="md:sticky md:top-28">
+          <div class="accent-line mb-6"></div>
+          <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">Developer Story</p>
+          <div class="relative mb-6">
+            <div class="absolute -top-3 -left-3 w-full h-full bg-primary-50 rounded-2xl"></div>
+            <img src="https://about.terroirhub.com/profile.jpg" alt="開発者プロフィール" class="relative z-10 w-full rounded-2xl aspect-square object-cover">
+          </div>
+          <h3 class="font-serif text-xl font-bold text-slate-900 mb-1">増尾圭亮（まっすー）</h3>
+          <p class="text-xs text-primary-500 font-medium mb-3">FOMUS代表 / Terroir HUB開発者</p>
+          <p class="text-sm text-body leading-relaxed" style="line-height: 1.8;">写真家として世界を巡りながら、自身が代表を務める、伝統工芸「枡」のブランド「FOMUS」をグローバルに展開。現在はアイルランドを拠点に、言語の壁を超えた"文化の越境DX"を推進中。</p>
+        </div>
+      </div>
+      <!-- Story column -->
+      <div class="md:col-span-8 space-y-10">
+        <div class="animate-on-scroll">
+          <h2 class="font-serif text-2xl md:text-3xl font-bold text-slate-900 leading-snug mb-6">
+            日本酒は、世界で最も<br>"伝えるのが難しい"<br>商品の一つかもしれません。
+          </h2>
+          <p class="text-sm text-body leading-relaxed mb-4" style="line-height: 2;">
+            情熱的な日本酒業界の声から生まれたこのサービスは、今ではあらゆる地域特産品や工芸品にも応用できます。日本酒業界が直面する課題解決から始まったサービスは、結果的に汎用性の高いソリューションとなりました。
+          </p>
+        </div>
+
+        <blockquote class="border-l-2 border-primary-500 pl-6 my-8 animate-on-scroll">
+          <p class="font-serif text-lg text-slate-900 leading-relaxed" style="line-height: 1.9;">
+            もっと多くの人に、日本酒の魅力を、もっと正確に、もっと情熱を持って伝えたい。
+          </p>
+          <p class="text-xs text-body opacity-70 mt-2">（この想いが、現在はあらゆる商品に広がっています）</p>
+        </blockquote>
+
+        <div class="animate-on-scroll">
+          <h3 class="font-serif text-lg font-bold text-slate-900 mb-4">背景にある気づき</h3>
+          <p class="text-sm text-body leading-relaxed" style="line-height: 2;">
+            日本の伝統工芸「枡」を扱うブランドを運営する中で多くの酒蔵関係者、日本酒ファンの方々と交流し、彼らが直面するリアルな課題を知りました。そのなかで何度も感じたのが、"言語の壁による機会損失"です。
+          </p>
+          <p class="text-sm text-body leading-relaxed mt-3" style="line-height: 2;">
+            インバウンド需要が高まるなか、外国人観光客が日本酒に興味を持ち、酒蔵を訪れることも増えています。しかし、すべての酒蔵が多言語に対応できるわけではありません。どれだけ素晴らしい日本酒でも、それが正しく伝わらなければ、本当の想いは届きません。
+          </p>
+        </div>
+
+        <div class="animate-on-scroll">
+          <h3 class="font-serif text-lg font-bold text-slate-900 mb-4">専属の「AIソムリエ」が、あなたの蔵を支えます</h3>
+          <p class="text-sm text-body leading-relaxed" style="line-height: 2;">
+            この課題を解決するために開発したのが、多言語対応のチャットボット「サクラ」です。最大の特長は、「あなただけのソムリエ」として機能すること。貴社の銘柄情報、商品写真、杜氏のコメント、社長の想いなどを組み込むことで、蔵専用のアシスタントがお客様一人ひとりに寄り添って案内します。
+          </p>
+        </div>
+
+        <div class="bg-[#faf9f7] rounded-xl border border-slate-200 p-6 animate-on-scroll">
+          <h3 class="font-serif text-lg font-bold text-slate-900 mb-4">安心の価格設定</h3>
+          <p class="text-sm text-body leading-relaxed" style="line-height: 2;">
+            最先端技術を活用しているため、一般的なWebサイト制作費の約1/3以下で導入可能。貴社専用ソムリエ・チャットボットが最初からセットになっています。蔵の規模に関係なく、「本気で届けたい想い」がある方には、全力で寄り添います。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ TERROIR HUB SERVICE ═══════════════════════════════════════════════ -->
+<section class="relative overflow-hidden py-20 md:py-28">
+  <div class="watermark bottom-4 right-0 rotate-2">Service</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-7 animate-on-scroll">
+        <div class="accent-line mb-6"></div>
+        <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">TerroirHUB</p>
+        <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-6">日本酒に特化した<br>多言語サイト構築パッケージ</h2>
+        <p class="text-xs text-body opacity-70 mb-6">※日本酒以外の商品にも対応しています。</p>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-3">
+            <div class="w-5 h-5 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <p class="text-sm text-body" style="line-height: 1.8;">精米歩合・原料米・酸度など、細部まで丁寧に対応し、専門情報を分かりやすく表示</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-5 h-5 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <p class="text-sm text-body" style="line-height: 1.8;">商品数・ブランドごとに専用設計。貴蔵の特色を活かしたオリジナルデザイン</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-5 h-5 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <p class="text-sm text-body" style="line-height: 1.8;">展示会や売店にも使えるスマホ対応UI。QRコードで即座にアクセス</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-5 h-5 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <p class="text-sm text-body" style="line-height: 1.8;">ブランドイメージに合わせた完全カスタマイズ対応。継続的なコンテンツ更新サポート</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a href="https://www.terroirhub.com/" target="_blank" class="inline-flex items-center justify-center gap-2 h-12 px-8 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer shadow-sm">
+            TerroirHUB の詳細を見る
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 h-12 px-8 text-base font-medium bg-white text-slate-700 border border-slate-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">今すぐ無料相談</a>
+        </div>
+      </div>
+      <!-- Mock product page -->
+      <div class="md:col-span-5 animate-on-scroll">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="bg-slate-900 px-5 py-3 flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+            </div>
+            <div class="flex-1 text-center">
+              <span class="text-xs text-slate-400">terroirhub.com</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-primary-500 font-medium mb-2">貴蔵</p>
+            <h4 class="font-serif text-lg font-bold text-slate-900 mb-1">Premium Junmai</h4>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="bg-primary-50 text-primary-500 px-2 py-0.5 rounded-full text-xs font-medium">EN</span>
+              <span class="bg-gray-50 text-body px-2 py-0.5 rounded-full text-xs">中文</span>
+              <span class="bg-gray-50 text-body px-2 py-0.5 rounded-full text-xs">한국어</span>
+            </div>
+            <div class="grid grid-cols-3 gap-3 mb-4">
+              <div class="bg-[#faf9f7] rounded-lg p-3 text-center">
+                <p class="text-xs text-body opacity-70">精米歩合</p>
+                <p class="text-sm font-medium text-slate-900">60%</p>
+              </div>
+              <div class="bg-[#faf9f7] rounded-lg p-3 text-center">
+                <p class="text-xs text-body opacity-70">酸度</p>
+                <p class="text-sm font-medium text-slate-900">1.3</p>
+              </div>
+              <div class="bg-[#faf9f7] rounded-lg p-3 text-center">
+                <p class="text-xs text-body opacity-70">原料米</p>
+                <p class="text-sm font-medium text-slate-900">山田錦</p>
+              </div>
+            </div>
+            <div class="bg-primary-50 rounded-lg p-3 flex items-center gap-3">
+              <img src="https://about.terroirhub.com/sakura.png" alt="AIサクラ" class="w-8 h-8 rounded-full">
+              <p class="text-xs text-primary-800">AIソムリエに質問する</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CTA ═══════════════════════════════════════════════ -->
+<section class="bg-slate-900 relative overflow-hidden py-20 md:py-24">
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-primary-400 rounded-full blur-3xl"></div>
+  </div>
+  <div class="max-w-4xl mx-auto px-6 md:px-8 text-center relative z-10">
+    <div class="accent-line mx-auto mb-6" style="background-color: #0abab5;"></div>
+    <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">今こそ、未来を掴む時</h2>
+    <p class="text-sm text-slate-300 mb-8 max-w-2xl mx-auto" style="line-height: 1.8;">
+      インバウンド需要が急回復している今、言語対応力が売上を左右します。AIサクラがあれば、訪れるすべての外国人観光客を確実に「ファン」に変えられます。
+    </p>
+    <a href="#contact" class="inline-flex items-center justify-center gap-2 h-12 px-10 text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer shadow-sm">
+      無料相談する
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CONTACT ═══════════════════════════════════════════════ -->
+<section id="contact" class="relative overflow-hidden py-20 md:py-28">
+  <div class="watermark top-0 left-0 -rotate-3">Contact</div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="grid md:grid-cols-12 gap-12 items-start">
+      <!-- Left info -->
+      <div class="md:col-span-5 animate-on-scroll">
+        <div class="accent-line mb-6"></div>
+        <p class="text-xs font-medium tracking-widest text-primary-500 mb-3 uppercase">Contact</p>
+        <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-6">まずは無料相談を</h2>
+        <p class="text-sm text-body leading-relaxed mb-8" style="line-height: 2;">想いを形にする第一歩を、一緒に踏み出しませんか？</p>
+
+        <div class="space-y-4 mb-8">
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-slate-900 mb-1">商品情報がまとまっていなくてもOK</p>
+            <p class="text-xs text-body opacity-70">一緒に整理しながら進めていきます</p>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-slate-900 mb-1">小規模蔵、家族経営の方にもおすすめ</p>
+            <p class="text-xs text-body opacity-70">規模に関わらず丁寧にサポートします</p>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <p class="text-sm font-medium text-slate-900 mb-1">お見積もり／事例共有もお気軽に</p>
+            <p class="text-xs text-body opacity-70">具体的な効果や費用を事前にご確認</p>
+          </div>
+        </div>
+
+        <div class="bg-primary-50 rounded-xl border border-primary-200 p-5">
+          <p class="text-xs text-primary-800 mb-1">メールでのお問い合わせ</p>
+          <a href="mailto:fomus.official@gmail.com" class="text-sm font-medium text-primary-500 hover:text-primary-700 transition-colors">fomus.official@gmail.com</a>
+        </div>
+      </div>
+
+      <!-- Right form -->
+      <div class="md:col-span-7 animate-on-scroll">
+        <div class="bg-white rounded-xl border border-slate-200 p-6 md:p-8 shadow-sm">
+          <h3 class="font-serif text-lg font-bold text-slate-900 mb-6">無料相談フォーム</h3>
+          <form class="space-y-5" onsubmit="return false;">
+            <div class="leading-normal">
+              <label for="name" class="block text-sm font-medium text-slate-900 mb-1.5">お名前 <span class="text-red-500">*</span></label>
+              <input type="text" id="name" class="w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-colors" placeholder="山田 太郎">
+            </div>
+            <div class="leading-normal">
+              <label for="company" class="block text-sm font-medium text-slate-900 mb-1.5">蔵名・会社名</label>
+              <input type="text" id="company" class="w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-colors" placeholder="株式会社〇〇酒造">
+            </div>
+            <div class="leading-normal">
+              <label for="email" class="block text-sm font-medium text-slate-900 mb-1.5">メールアドレス <span class="text-red-500">*</span></label>
+              <input type="email" id="email" class="w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-colors" placeholder="info@example.com">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div class="leading-normal">
+                <label for="phone" class="block text-sm font-medium text-slate-900 mb-1.5">電話番号</label>
+                <input type="tel" id="phone" class="w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-colors" placeholder="090-xxxx-xxxx">
+              </div>
+              <div class="leading-normal">
+                <label for="website" class="block text-sm font-medium text-slate-900 mb-1.5">現在のWebサイト</label>
+                <input type="url" id="website" class="w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-colors" placeholder="https://...">
+              </div>
+            </div>
+            <div class="leading-normal">
+              <label for="message" class="block text-sm font-medium text-slate-900 mb-1.5">ご相談内容</label>
+              <textarea id="message" rows="4" class="w-full px-3 py-2 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-colors resize-y" placeholder="お気軽にご記入ください"></textarea>
+            </div>
+            <div class="leading-normal">
+              <p class="block text-sm font-medium text-slate-900 mb-2">相談方法のご希望</p>
+              <div class="flex flex-wrap gap-4">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="method" value="email" class="w-4 h-4 text-primary-500 border-slate-300 focus:ring-primary-500/50" checked>
+                  <span class="text-sm text-body">まずはメールでやり取り</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="method" value="online" class="w-4 h-4 text-primary-500 border-slate-300 focus:ring-primary-500/50">
+                  <span class="text-sm text-body">オンライン面談希望</span>
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="inline-flex items-center justify-center gap-2 h-12 px-8 w-full text-base font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-700 transition-colors cursor-pointer shadow-sm">
+              無料相談を申し込む
+            </button>
+            <p class="text-xs text-body opacity-50 text-center">お客様の情報は厳重に管理し、営業目的以外では使用いたしません</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ FOOTER ═══════════════════════════════════════════════ -->
+<footer class="bg-white border-t border-slate-200">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+      <!-- Brand -->
+      <div class="md:col-span-5">
+        <span class="font-serif text-xl font-bold text-slate-900">Terroir HUB</span>
+        <p class="text-xs text-body opacity-60 mt-1 mb-3">Powered by FOMUS</p>
+        <p class="font-serif text-sm text-slate-900 mb-2">味を生む背景を、世界と言葉でつなぐ。</p>
+        <p class="text-xs text-body opacity-60">日本のテロワールを、世界32言語で。</p>
+      </div>
+      <!-- Links -->
+      <div class="md:col-span-2">
+        <h4 class="text-xs font-medium text-slate-900 tracking-wider uppercase mb-4">サービス</h4>
+        <ul class="space-y-2">
+          <li><a href="https://www.terroirhub.com/" class="text-sm text-body opacity-70 hover:opacity-100 hover:text-primary-500 transition-colors" target="_blank">TerroirHUB</a></li>
+          <li><a href="#contact" class="text-sm text-body opacity-70 hover:opacity-100 hover:text-primary-500 transition-colors">無料相談</a></li>
+          <li><a href="#scenes" class="text-sm text-body opacity-70 hover:opacity-100 hover:text-primary-500 transition-colors">活用事例</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-2">
+        <h4 class="text-xs font-medium text-slate-900 tracking-wider uppercase mb-4">会社情報</h4>
+        <ul class="space-y-2">
+          <li><span class="text-sm text-body opacity-70">合同会社FOMUS</span></li>
+        </ul>
+      </div>
+      <div class="md:col-span-3">
+        <h4 class="text-xs font-medium text-slate-900 tracking-wider uppercase mb-4">サポート</h4>
+        <ul class="space-y-2">
+          <li><a href="#contact" class="text-sm text-body opacity-70 hover:opacity-100 hover:text-primary-500 transition-colors">お問い合わせ</a></li>
+          <li><a href="mailto:fomus.official@gmail.com" class="text-sm text-body opacity-70 hover:opacity-100 hover:text-primary-500 transition-colors">fomus.official@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-t border-slate-200 my-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-body opacity-50">&copy; 2025 Terroir HUB &ndash; Powered by FOMUS</p>
+      <p class="text-xs text-body opacity-40">Demo site created by SAQT（サクッと）</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════ SCRIPTS ═══════════════════════════════════════════════ -->
+<script>
+// Mobile menu toggle
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('hidden');
+});
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+});
+
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// Navbar shrink on scroll
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    header.classList.add('shadow-sm');
+  } else {
+    header.classList.remove('shadow-sm');
+  }
+});
+</script>
+
+</body>
+</html>

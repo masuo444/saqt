@@ -195,10 +195,11 @@ def extract_contact_info(html):
     if fax:
         info["fax"] = fax.group(1).strip()
 
-    # メール
-    email = re.search(r'[\w.+-]+@[\w-]+\.[\w.-]+', html)
-    if email:
-        info["email"] = email.group(0)
+    # メールアドレス（複数パターンで徹底抽出）
+    emails = extract_emails(html)
+    if emails:
+        info["email"] = emails[0]  # 最も信頼性が高いもの
+        info["emails_all"] = emails  # 全候補
 
     # 住所（〒から始まる）
     addr = re.search(r'〒[\d\-]+\s*[^\n<]{5,60}', html)
@@ -216,6 +217,78 @@ def extract_contact_info(html):
         info["holiday"] = holiday.group(1).strip()
 
     return info
+
+
+def extract_emails(html):
+    """メールアドレスを徹底的に抽出"""
+    emails = set()
+
+    # 1. mailto: リンクから（最も信頼性が高い）
+    mailto = re.findall(r'mailto:([^\s"\'?&]+)', html, re.I)
+    for m in mailto:
+        m = m.strip().lower()
+        if '@' in m and is_valid_email(m):
+            emails.add(m)
+
+    # 2. HTMLテキストから直接
+    raw_emails = re.findall(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}', html)
+    for e in raw_emails:
+        e = e.strip().lower()
+        if is_valid_email(e):
+            emails.add(e)
+
+    # 3. JavaScript内の難読化されたメール（@を[at]等に置換しているケース）
+    obfuscated = re.findall(r'[a-zA-Z0-9._%+\-]+\s*[\[（(]\s*(?:at|＠|アット)\s*[\]）)]\s*[a-zA-Z0-9.\-]+\.\s*[a-zA-Z]{2,}', html, re.I)
+    for o in obfuscated:
+        cleaned = re.sub(r'\s*[\[（(]\s*(?:at|＠|アット)\s*[\]）)]\s*', '@', o, flags=re.I)
+        cleaned = cleaned.replace(' ', '').lower()
+        if is_valid_email(cleaned):
+            emails.add(cleaned)
+
+    # 4. 問い合わせページへのリンクを検出（メールが見つからない場合のフォールバック）
+    # → メール自体は取れないが、フォームURLは記録
+
+    # フィルタリング: 無関係なメールを除外
+    exclude_patterns = [
+        'example.com', 'example.jp', 'test.com',
+        'noreply', 'no-reply', 'mailer-daemon',
+        'wixpress.com', 'sentry.io', 'google.com',
+        '.png', '.jpg', '.gif', '.css', '.js'
+    ]
+    filtered = []
+    for e in emails:
+        if not any(p in e for p in exclude_patterns):
+            filtered.append(e)
+
+    # info@ や contact@ を優先的に先頭に
+    def priority(email):
+        if email.startswith('info@'):
+            return 0
+        if email.startswith('contact@'):
+            return 1
+        if email.startswith('mail@'):
+            return 2
+        return 9
+
+    filtered.sort(key=priority)
+    return filtered
+
+
+def is_valid_email(email):
+    """基本的なメールアドレスの妥当性チェック"""
+    if not email or '@' not in email:
+        return False
+    parts = email.split('@')
+    if len(parts) != 2:
+        return False
+    local, domain = parts
+    if not local or not domain:
+        return False
+    if '.' not in domain:
+        return False
+    if len(local) > 64 or len(domain) > 255:
+        return False
+    return True
 
 
 def extract_all(url):

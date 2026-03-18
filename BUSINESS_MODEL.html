@@ -478,68 +478,170 @@
     <!-- 2. ビジネスフロー -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title">2. ビジネスフロー</h2>
-            <p class="section-sub">リード獲得から納品・保守まで。あなたが関わるのは黄色のステップだけ。</p>
+            <h2 class="section-title">2. ビジネスフロー（実装済み）</h2>
+            <p class="section-sub">Claude Code スキル <code>/saqt-proposal [URL]</code> で1〜4を一括実行。あなたが関わるのは黄色だけ。</p>
 
             <div class="flow-diagram">
                 <div class="flow-phase">
-                    <div class="flow-phase-header">1. リード発見</div>
+                    <div class="flow-phase-header">1. サイト抽出・診断</div>
                     <div class="flow-phase-body">
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Lead Hunter</div>
+                        <div class="flow-agent"><span class="bot-icon">🤖</span> Site Extractor</div>
                         <div class="flow-agent"><span class="bot-icon">🤖</span> Site Analyzer</div>
-                        <div class="flow-note">Google Mapsから自動収集<br>サイトをスコアリング</div>
+                        <div class="flow-note">
+                            テキスト・画像・カラー・ナビ全抽出<br>
+                            100点満点でスコアリング<br>
+                            <strong>スキル: /extract-site /diagnose-site</strong>
+                        </div>
                     </div>
                 </div>
                 <div class="flow-arrow-col">&rarr;</div>
                 <div class="flow-phase">
-                    <div class="flow-phase-header">2. 営業</div>
+                    <div class="flow-phase-header">2. デモサイト生成</div>
                     <div class="flow-phase-body">
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Outreach Agent</div>
                         <div class="flow-agent"><span class="bot-icon">🤖</span> Demo Builder</div>
-                        <div class="flow-note">パーソナライズメール送信<br>デモサイト自動生成</div>
+                        <div class="flow-agent"><span class="bot-icon">🤖</span> Chatbot Builder</div>
+                        <div class="flow-note">
+                            相手の実データ・実画像・実カラーで制作<br>
+                            melta-UI準拠のプロ品質<br>
+                            チャットボット(knowledge.json)も自動生成<br>
+                            <strong>スキル: /generate-demo</strong>
+                        </div>
                     </div>
                 </div>
                 <div class="flow-arrow-col">&rarr;</div>
                 <div class="flow-phase">
-                    <div class="flow-phase-header">3. クロージング</div>
+                    <div class="flow-phase-header">3. 営業メール送信</div>
+                    <div class="flow-phase-body">
+                        <div class="flow-agent"><span class="bot-icon">🤖</span> Outreach Agent (Gemini)</div>
+                        <div class="flow-agent"><span class="bot-icon">🤖</span> Follow-up Agent</div>
+                        <div class="flow-note">
+                            Geminiで完全個別化メール生成<br>
+                            デモHTML添付で送信<br>
+                            3日後に自動フォローアップ<br>
+                            重複送信防止(sent_log.csv)<br>
+                            <strong>スキル: /outreach</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-arrow-col">&rarr;</div>
+                <div class="flow-phase">
+                    <div class="flow-phase-header">4. クロージング</div>
                     <div class="flow-phase-body">
                         <div class="flow-agent flow-human"><span class="bot-icon">👤</span> Founder</div>
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Follow-up Agent</div>
-                        <div class="flow-note">オンライン面談（最小限）<br>返信・日程調整は自動</div>
+                        <div class="flow-note">
+                            オンライン面談（高単価案件のみ）<br>
+                            ライトプランは面談なしも可<br>
+                            <strong>あなたの唯一の作業</strong>
+                        </div>
                     </div>
                 </div>
                 <div class="flow-arrow-col">&rarr;</div>
                 <div class="flow-phase">
-                    <div class="flow-phase-header">4. 制作</div>
+                    <div class="flow-phase-header">5. 本番制作・納品</div>
                     <div class="flow-phase-body">
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Web Builder</div>
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Content Writer</div>
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> QA Agent</div>
-                        <div class="flow-note">テンプレート + AI生成<br>品質チェック自動</div>
+                        <div class="flow-agent"><span class="bot-icon">🤖</span> Web Builder (Claude Code)</div>
+                        <div class="flow-agent flow-human"><span class="bot-icon">👤</span> Founder（最終確認）</div>
+                        <div class="flow-agent"><span class="bot-icon">🤖</span> Deploy Agent (Vercel)</div>
+                        <div class="flow-note">
+                            デモをベースに本番サイト制作<br>
+                            <strong>Founderが品質を最終確認</strong><br>
+                            Vercelにデプロイ<br>
+                            チャットボット設置<br>
+                            microCMS連携（オプション）
+                        </div>
                     </div>
                 </div>
                 <div class="flow-arrow-col">&rarr;</div>
                 <div class="flow-phase">
-                    <div class="flow-phase-header">5. 納品</div>
-                    <div class="flow-phase-body">
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Deploy Agent</div>
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Billing Agent</div>
-                        <div class="flow-note">サーバー設定・公開<br>請求書発行</div>
-                    </div>
-                </div>
-                <div class="flow-arrow-col">&rarr;</div>
-                <div class="flow-phase">
-                    <div class="flow-phase-header">6. 保守・拡大</div>
+                    <div class="flow-phase-header">6. 保守・ストック</div>
                     <div class="flow-phase-body">
                         <div class="flow-agent"><span class="bot-icon">🤖</span> Maintenance Agent</div>
-                        <div class="flow-agent"><span class="bot-icon">🤖</span> Upsell Agent</div>
-                        <div class="flow-note">定期更新・監視<br>追加提案の自動化</div>
+                        <div class="flow-note">
+                            月額保守（1万〜10万/月）<br>
+                            修正依頼はClaude Codeで対応<br>
+                            microCMSでクライアント自身も更新可<br>
+                            <strong>積み上がるストック収入</strong>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div style="text-align:center; padding:16px; background:#fef3c7; border-radius:10px; font-size:0.85rem; color:#92400e; font-weight:600;">
-                👤 あなたが手を動かすのは「3. クロージング」のオンライン面談だけ。それ以外は全てAIエージェントが自動実行。
+            <div style="text-align:center; padding:16px; background:#fef3c7; border-radius:10px; font-size:0.85rem; color:#92400e; font-weight:600; margin-top:16px;">
+                👤 あなたの作業は「4. クロージング」と「5. 納品前の最終確認」。1〜3は <code>/saqt-proposal [URL]</code> で全自動。6はClaude Codeで対応。
+            </div>
+
+            <div style="margin-top:24px; padding:20px; background:var(--navy); border-radius:10px; color:#fff;">
+                <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:12px;">実装済みツールチェーン</h4>
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; font-size:0.78rem;">
+                    <div>
+                        <strong style="color:#fff;">抽出・診断</strong><br>
+                        <span style="color:rgba(255,255,255,0.5);">07_site_extractor.py<br>02_analyze_sites.py</span>
+                    </div>
+                    <div>
+                        <strong style="color:#fff;">デモ生成 + PDF</strong><br>
+                        <span style="color:rgba(255,255,255,0.5);">03_generate_demo.py<br>melta-UI + Tailwind<br>Playwright → スクリーンショット → PDF<br>knowledge.json自動生成</span>
+                    </div>
+                    <div>
+                        <strong style="color:#fff;">営業メール</strong><br>
+                        <span style="color:rgba(255,255,255,0.5);">04_send_outreach.py<br>Gemini 2.0 Flash個別化<br>Gmail SMTP送信<br>PDF添付対応</span>
+                    </div>
+                    <div>
+                        <strong style="color:#fff;">COO Bot（佐倉 / サクちゃん）</strong><br>
+                        <span style="color:rgba(255,255,255,0.5);">09_telegram_coo.py<br>Telegram承認/却下<br>日次レポート<br>リード通知</span>
+                    </div>
+                    <div>
+                        <strong style="color:#fff;">デプロイ</strong><br>
+                        <span style="color:rgba(255,255,255,0.5);">Vercel + GitHub連携<br>saqt-ai.com</span>
+                    </div>
+                    <div>
+                        <strong style="color:#fff;">Claude Code スキル</strong><br>
+                        <span style="color:rgba(255,255,255,0.5);">/saqt-proposal<br>/diagnose-site<br>/extract-site<br>/generate-demo<br>/outreach</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ランニングコスト -->
+            <div style="margin-top:24px; padding:20px; background:#fff; border:1px solid var(--border); border-radius:10px;">
+                <h4 style="font-size:0.9rem; color:var(--navy); margin-bottom:12px;">💰 ランニングコスト（月額）</h4>
+                <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; font-size:0.82rem;">
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">ドメイン（saqt-ai.com）</span>
+                        <strong style="color:var(--navy);">144円/月</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">Vercel（Hobbyプラン）</span>
+                        <strong style="color:var(--green);">無料</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">Gemini API（メール生成 + チャットボット）</span>
+                        <strong style="color:var(--green);">無料枠内</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">Gmail SMTP（営業メール送信）</span>
+                        <strong style="color:var(--green);">無料</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">Telegram Bot API（サクちゃん）</span>
+                        <strong style="color:var(--green);">無料</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">GitHub</span>
+                        <strong style="color:var(--green);">無料</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">Tailwind CDN / Google Fonts</span>
+                        <strong style="color:var(--green);">無料</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f1f5f9;">
+                        <span style="color:var(--text-secondary);">Playwright / Chromium（PDF生成）</span>
+                        <strong style="color:var(--green);">無料（ローカル）</strong>
+                    </div>
+                </div>
+                <div style="margin-top:12px; padding:12px; background:#f0fdf4; border-radius:8px; text-align:center;">
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">月額合計: </span>
+                    <strong style="font-size:1.2rem; color:var(--green);">約144円</strong>
+                    <span style="font-size:0.75rem; color:var(--text-muted); display:block; margin-top:4px;">※ Claude Pro月額3,000円は開発ツールとして別計上</span>
+                </div>
             </div>
         </div>
     </section>
@@ -550,13 +652,22 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">3. AI組織図</h2>
-            <p class="section-sub">Founder（あなた）+ 4部門 × 13体のAIエージェント</p>
+            <p class="section-sub">ボス（Founder）+ COO佐倉 + 5部門 × 16体のAIエージェント</p>
 
             <div class="org-chart">
                 <div class="org-founder">
                     <span class="human-badge">HUMAN</span>
-                    <h3>Founder / CEO</h3>
-                    <p>戦略・意思決定・重要クライアント対応</p>
+                    <h3>ボス / Founder</h3>
+                    <p>戦略・意思決定・品質最終確認・重要クライアント対応</p>
+                </div>
+                <div class="org-line"></div>
+
+                <!-- COO Agent -->
+                <div style="display:inline-block; background:linear-gradient(135deg, #f97316, #ea580c); color:#fff; padding:16px 32px; border-radius:12px; margin-bottom:24px; position:relative; box-shadow:0 4px 20px rgba(249,115,22,0.3);">
+                    <span style="position:absolute; top:-8px; right:-8px; background:#1e293b; color:#fff; font-size:0.6rem; font-weight:700; padding:3px 10px; border-radius:50px;">AI</span>
+                    <h3 style="font-size:1.1rem; font-weight:800; margin:0;">COO Agent「佐倉」（サクちゃん）</h3>
+                    <p style="font-size:0.72rem; opacity:0.85; margin-top:2px;">全業務オーケストレーション・Telegram承認・メール送信名義</p>
+                    <p style="font-size:0.65rem; opacity:0.6; margin-top:4px;">実装: /saqt-proposal + Telegram Bot + 06_auto_pipeline.py</p>
                 </div>
                 <div class="org-line"></div>
 
@@ -679,12 +790,45 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- マーケティング部 -->
+                    <div class="org-division" style="grid-column: 1 / -1;">
+                        <div class="org-div-header" style="background:#fef3c7; color:#92400e;">マーケティング部（Marketing）</div>
+                        <div class="org-div-body">
+                            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+                                <div class="org-agent" style="background:#fffbeb;">
+                                    <div class="org-agent-icon" style="background:#fef3c7;">🔍</div>
+                                    <div>
+                                        <strong>SEO Agent</strong>
+                                        <div class="org-agent-role">構造化データ・メタ最適化・サイトマップ・内部リンク設計・ページ速度改善</div>
+                                    </div>
+                                </div>
+                                <div class="org-agent" style="background:#fffbeb;">
+                                    <div class="org-agent-icon" style="background:#fef3c7;">🤖</div>
+                                    <div>
+                                        <strong>AIO Agent</strong>
+                                        <div class="org-agent-role">AI Overview最適化・FAQ構造化・エンティティ最適化・検索意図分析</div>
+                                    </div>
+                                </div>
+                                <div class="org-agent" style="background:#fffbeb;">
+                                    <div class="org-agent-icon" style="background:#fef3c7;">📝</div>
+                                    <div>
+                                        <strong>Content Strategist</strong>
+                                        <div class="org-agent-role">キーワード戦略・コンテンツ企画・ブログ記事生成・SNS投稿設計</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top:12px; padding:10px; background:#fffbeb; border-radius:8px; font-size:0.72rem; color:#92400e; text-align:center;">
+                                ミッション: 「ホームページ リニューアル」「サイト 古い 更新」等の検索で SAQT が1位表示される状態を作る
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Founder の役割 -->
+            <!-- ボスの役割 -->
             <div class="founder-section">
-                <h3>👤 Founderの役割（あなたがやること）</h3>
+                <h3>👤 ボスの役割（あなたがやること）</h3>
                 <div class="founder-tasks">
                     <div class="founder-task">
                         <span class="task-icon">🎯</span>
@@ -703,8 +847,8 @@
                     <div class="founder-task">
                         <span class="task-icon">👁️</span>
                         <div>
-                            <h4>品質チェック（抜き打ち）</h4>
-                            <p>AIが作ったデモサイトの最終確認。全件ではなく抜き打ちでOK。</p>
+                            <h4>納品前の最終確認</h4>
+                            <p>本番サイトの品質を確認してからデプロイ。COO Agentが準備した成果物をチェック。</p>
                         </div>
                     </div>
                     <div class="founder-task">
