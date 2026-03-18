@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「保護されていない通信」と表示されるサイトは今すぐ対応すべき理由｜SAQT</title>
+    <meta name="description" content="SSL未対応サイトのリスクを解説。「保護されていない通信」の警告表示によるユーザー離脱、SEOへの悪影響、個人情報漏洩リスクと、SSL対応の方法・費用をまとめました。">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="SAQT（サクッと） - 合同会社FOMUS">
+    <meta name="theme-color" content="#f97316">
+    <link rel="canonical" href="https://saqt-ai.com/blog/ssl-not-supported.html" />
+    <link rel="icon" type="image/png" href="../images/saqt-favicon.png">
+    <meta property="og:title" content="「保護されていない通信」と表示されるサイトは今すぐ対応すべき理由">
+    <meta property="og:description" content="SSL未対応サイトのリスクと対応方法を徹底解説。SEO・信頼・セキュリティの3つの観点から。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://saqt-ai.com/blog/ssl-not-supported.html">
+    <meta property="og:site_name" content="SAQT（サクッと）">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://saqt-ai.com/images/saqt-ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="「保護されていない通信」と表示されるサイトは今すぐ対応すべき理由">
+    <meta name="twitter:description" content="SSL未対応サイトのリスクと対応方法を徹底解説。">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "「保護されていない通信」と表示されるサイトは今すぐ対応すべき理由",
+      "description": "SSL未対応サイトのリスクを解説。「保護されていない通信」の警告表示によるユーザー離脱、SEOへの悪影響、個人情報漏洩リスクと、SSL対応の方法・費用をまとめました。",
+      "author": {
+        "@type": "Organization",
+        "name": "合同会社FOMUS",
+        "url": "https://saqt-ai.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SAQT（サクッと）",
+        "url": "https://saqt-ai.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://saqt-ai.com/images/saqt-ogp.png"
+        }
+      },
+      "datePublished": "2026-03-18",
+      "dateModified": "2026-03-18",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://saqt-ai.com/blog/ssl-not-supported.html"
+      },
+      "keywords": ["SSL 未対応 リスク", "保護されていない通信", "HTTPS 対応"]
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#f97316',
+            'brand-dark': '#ea580c',
+            'brand-light': '#fff7ed'
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans JP', 'Hiragino Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+    </script>
+    <style>
+      body { font-family: 'Inter', 'Noto Sans JP', 'Hiragino Sans', sans-serif; }
+      .article-body { font-size: 17px; line-height: 1.9; color: #374151; }
+      .article-body h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f97316; }
+      .article-body h3 { font-size: 1.2rem; font-weight: 600; color: #1f2937; margin-top: 2rem; margin-bottom: 0.75rem; }
+      .article-body p { margin-bottom: 1.25rem; }
+      .article-body ul { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+      .article-body ul li { margin-bottom: 0.5rem; list-style-type: disc; }
+      .article-body strong { color: #111827; }
+      .article-body table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 15px; }
+      .article-body th { background: #f9fafb; text-align: left; padding: 0.75rem 1rem; border: 1px solid #e5e7eb; font-weight: 600; color: #111827; }
+      .article-body td { padding: 0.75rem 1rem; border: 1px solid #e5e7eb; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 text-brand font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
+                SAQT
+            </a>
+            <a href="../index.html#contact" class="inline-flex items-center justify-center h-10 px-5 text-sm font-medium bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors">
+                お問い合わせ
+            </a>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <article class="max-w-[720px] mx-auto">
+
+            <!-- Breadcrumb -->
+            <nav class="text-sm text-slate-500 mb-6" aria-label="パンくずリスト">
+                <a href="../index.html" class="hover:text-slate-700 transition-colors">ホーム</a>
+                <span class="mx-2">/</span>
+                <span class="text-slate-900 font-medium">ブログ</span>
+            </nav>
+
+            <!-- Title -->
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight mb-4">「保護されていない通信」と表示されるサイトは<br class="hidden sm:inline">今すぐ対応すべき理由</h1>
+
+            <!-- Meta -->
+            <div class="flex items-center gap-4 text-sm text-slate-500 mb-8 pb-8 border-b border-slate-200">
+                <time datetime="2026-03-18">2026.03.18</time>
+                <span>·</span>
+                <span>読了目安 5分</span>
+            </div>
+
+            <!-- Body -->
+            <div class="article-body">
+
+                <p>自社のホームページをChromeで開いたとき、アドレスバーに<strong>「保護されていない通信」</strong>と表示されていませんか。もし表示されているなら、そのサイトはSSL（暗号化通信）に未対応です。そしてこの状態は、あなたが思っている以上に深刻な問題を引き起こしています。</p>
+
+                <h2>「保護されていない通信」とは何か</h2>
+
+                <p>SSLとは、Webサイトとユーザーの間の通信を暗号化する仕組みです。SSL対応済みのサイトはURLが「https://」で始まり、ブラウザに鍵マークが表示されます。一方、未対応のサイトは「http://」のままで、通信内容が第三者に傍受される可能性があります。</p>
+
+                <p>Google Chromeは2018年から、SSL未対応のすべてのサイトに対して「保護されていない通信」という警告を表示するようになりました。これは問い合わせフォームがあるサイトだけでなく、<strong>すべてのページが対象</strong>です。</p>
+
+                <h2>警告表示がユーザーの離脱を招く</h2>
+
+                <p>「保護されていない通信」という警告は、一般のユーザーにとって不安を感じさせるメッセージです。GlobalSignの調査によると、セキュリティ警告を見たユーザーの<strong>約85%がサイトの利用をやめる</strong>と回答しています。</p>
+
+                <p>特に初めてサイトを訪れるユーザーにとっては、その企業の第一印象が「安全でないサイトを運営している会社」になってしまいます。これは信頼性の面で大きなマイナスです。</p>
+
+                <h2>SEOにも悪影響がある</h2>
+
+                <p>Googleは<strong>2014年からHTTPS対応を検索ランキングのシグナル</strong>として使用していると公式に発表しています。つまり、同じ内容のサイトであれば、HTTPS対応しているサイトの方が検索結果で上位に表示されやすくなります。</p>
+
+                <p>また、Googleは2021年からCore Web Vitalsを重視しており、安全な接続はユーザー体験の一部として評価されています。SSL未対応は、検索順位を下げる直接的な要因のひとつです。</p>
+
+                <h2>個人情報が漏洩するリスク</h2>
+
+                <p>SSL未対応のサイトでは、ユーザーが入力した情報が<strong>暗号化されずにネットワーク上を流れます</strong>。問い合わせフォームに入力された名前、メールアドレス、電話番号などが、悪意のある第三者に傍受される可能性があるのです。</p>
+
+                <p>万が一情報漏洩が発生した場合、企業の信頼は大きく損なわれます。2022年の個人情報保護法改正により、<strong>漏洩時の報告義務</strong>も厳格化されました。「小さな会社だから大丈夫」ということはありません。</p>
+
+                <h2>SSL対応の方法と費用</h2>
+
+                <p>SSL対応にはいくつかの方法があります。</p>
+
+                <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>方法</th>
+                            <th>費用の目安</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>無料SSL（Let's Encrypt）</td>
+                            <td>0円</td>
+                            <td>多くのサーバーで利用可。設定は必要</td>
+                        </tr>
+                        <tr>
+                            <td>共用SSL（サーバー標準）</td>
+                            <td>0〜数千円/年</td>
+                            <td>レンタルサーバーの標準機能として提供</td>
+                        </tr>
+                        <tr>
+                            <td>企業認証SSL</td>
+                            <td>3〜10万円/年</td>
+                            <td>企業の実在確認あり。信頼性が高い</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <p>ただし、既存サイトへのSSL導入は単に証明書を入れるだけでは済まない場合があります。サイト内のリンクや画像パスの修正、リダイレクト設定、外部サービスとの連携確認など、<strong>技術的な対応が必要</strong>です。自社で対応が難しい場合は、制作会社に依頼するのが確実です。</p>
+
+                <h2>SAQTならリニューアル時にSSL標準対応</h2>
+
+                <p>SAQTで制作するすべてのサイトには、<strong>SSL対応が標準で含まれています</strong>。追加費用は一切かかりません。</p>
+
+                <ul>
+                    <li><strong>SSL設定・リダイレクト設定</strong>を制作費に含んで対応</li>
+                    <li><strong>スマホ対応も標準</strong>：SSL対応だけでなく、サイト全体を最新の基準に</li>
+                    <li><strong>打ち合わせは1回</strong>：忙しい経営者の時間を無駄にしません</li>
+                    <li><strong>最短3日で納品</strong>：セキュリティリスクを素早く解消</li>
+                </ul>
+
+                <p>「保護されていない通信」の警告が表示されている状態は、毎日お客様を逃していることと同じです。早めの対応をおすすめします。</p>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-12 bg-brand-light border border-orange-200 rounded-xl p-8 text-center">
+                <p class="text-lg font-bold text-slate-900 mb-2">SSL未対応のサイト、今すぐ解消しませんか</p>
+                <p class="text-sm text-slate-600 mb-6">リニューアル時にSSL標準対応・追加費用なし</p>
+                <a href="../index.html#contact" class="inline-flex items-center justify-center h-12 px-8 text-base font-medium bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors">
+                    SAQTに相談する
+                </a>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 mt-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 text-center text-sm text-slate-500">
+            <p>&copy; 2026 SAQT（サクッと） - 合同会社FOMUS</p>
+        </div>
+    </footer>
+
+</body>
+</html>
