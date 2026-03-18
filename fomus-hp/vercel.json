@@ -19,6 +19,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/government", "destination": "/government.html" }
+    { "source": "/government", "destination": "/government.html" },
+    { "source": "/googled0b9a3c3b8d1edb9.html", "destination": "/googled0b9a3c3b8d1edb9.html" }
   ]
 }
