@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「前のWeb制作会社と連絡が取れない」場合の対処法と引き継ぎ方｜SAQT</title>
+    <meta name="description" content="Web制作会社と連絡が取れなくなった場合の対処法を解説。サーバー・ドメインの調査方法、管理権限の移管、データ救出の手順、SAQTの引き継ぎサービスまで。">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="SAQT（サクッと） - 合同会社FOMUS">
+    <meta name="theme-color" content="#f97316">
+    <link rel="canonical" href="https://saqt-ai.com/blog/old-website-vendor-lost.html" />
+    <link rel="icon" type="image/png" href="../images/saqt-favicon.png">
+    <meta property="og:title" content="「前のWeb制作会社と連絡が取れない」場合の対処法と引き継ぎ方">
+    <meta property="og:description" content="制作会社と連絡が取れない場合の対処法。サーバー・ドメイン調査、管理権限の移管、データ救出まで解説。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://saqt-ai.com/blog/old-website-vendor-lost.html">
+    <meta property="og:site_name" content="SAQT（サクッと）">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://saqt-ai.com/images/saqt-ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="「前のWeb制作会社と連絡が取れない」場合の対処法と引き継ぎ方">
+    <meta name="twitter:description" content="制作会社と連絡が取れない場合の対処法を解説。">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "「前のWeb制作会社と連絡が取れない」場合の対処法と引き継ぎ方",
+      "description": "Web制作会社と連絡が取れなくなった場合の対処法を解説。サーバー・ドメインの調査方法、管理権限の移管、データ救出の手順、SAQTの引き継ぎサービスまで。",
+      "author": {
+        "@type": "Organization",
+        "name": "合同会社FOMUS",
+        "url": "https://saqt-ai.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SAQT（サクッと）",
+        "url": "https://saqt-ai.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://saqt-ai.com/images/saqt-ogp.png"
+        }
+      },
+      "datePublished": "2026-03-18",
+      "dateModified": "2026-03-18",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://saqt-ai.com/blog/old-website-vendor-lost.html"
+      },
+      "keywords": ["ホームページ 制作会社 連絡取れない", "Web制作 引き継ぎ", "ホームページ 管理 移管"]
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#f97316',
+            'brand-dark': '#ea580c',
+            'brand-light': '#fff7ed'
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans JP', 'Hiragino Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+    </script>
+    <style>
+      body { font-family: 'Inter', 'Noto Sans JP', 'Hiragino Sans', sans-serif; }
+      .article-body { font-size: 17px; line-height: 1.9; color: #374151; }
+      .article-body h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f97316; }
+      .article-body h3 { font-size: 1.2rem; font-weight: 600; color: #1f2937; margin-top: 2rem; margin-bottom: 0.75rem; }
+      .article-body p { margin-bottom: 1.25rem; }
+      .article-body ul { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+      .article-body ul li { margin-bottom: 0.5rem; list-style-type: disc; }
+      .article-body strong { color: #111827; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 text-brand font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
+                SAQT
+            </a>
+            <a href="../index.html#contact" class="inline-flex items-center justify-center h-10 px-5 text-sm font-medium bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors">
+                お問い合わせ
+            </a>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <article class="max-w-[720px] mx-auto">
+
+            <!-- Breadcrumb -->
+            <nav class="text-sm text-slate-500 mb-6" aria-label="パンくずリスト">
+                <a href="../index.html" class="hover:text-slate-700 transition-colors">ホーム</a>
+                <span class="mx-2">/</span>
+                <span class="text-slate-900 font-medium">ブログ</span>
+            </nav>
+
+            <!-- Title -->
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight mb-4">「前のWeb制作会社と連絡が取れない」<br class="hidden sm:inline">場合の対処法と引き継ぎ方</h1>
+
+            <!-- Meta -->
+            <div class="flex items-center gap-4 text-sm text-slate-500 mb-8 pb-8 border-b border-slate-200">
+                <time datetime="2026-03-18">2026.03.18</time>
+                <span>·</span>
+                <span>読了目安 5分</span>
+            </div>
+
+            <!-- Body -->
+            <div class="article-body">
+
+                <p>「ホームページを修正したいのに、前の制作会社と連絡が取れない」。SAQTに寄せられるご相談の中でも、特に多いのがこの問題です。実は、Web制作会社の<strong>廃業率は5年以内で約40%</strong>と言われており、決して珍しい状況ではありません。焦る必要はありません。適切に対処すれば、サイトを取り戻すことは可能です。</p>
+
+                <h2>よくある状況パターン</h2>
+
+                <p>制作会社と連絡が取れなくなるケースには、いくつかのパターンがあります。</p>
+
+                <ul>
+                    <li><strong>制作会社が廃業・倒産した</strong>：最も多いケースです。電話もメールも繋がらなくなります</li>
+                    <li><strong>担当者が退職して引き継ぎされていない</strong>：会社は存続しているが、対応してもらえない</li>
+                    <li><strong>フリーランスに依頼していた</strong>：個人の制作者が活動を停止してしまった</li>
+                    <li><strong>契約が曖昧で、管理費未払いを理由に連絡を断たれた</strong></li>
+                </ul>
+
+                <h2>まず確認すべき3つのこと</h2>
+
+                <h3>1. ドメインの所有者を確認する</h3>
+                <p>ドメイン（例：example.com）が自社名義か、制作会社名義かを確認することが最優先です。<strong>WHOIS検索</strong>（whois.jpやお名前.comのWHOIS検索）で、ドメインの登録者情報を調べられます。自社名義であれば、ドメインの管理は取り戻せる可能性が高いです。</p>
+
+                <h3>2. サーバーの契約状況を確認する</h3>
+                <p>レンタルサーバーの契約が自社名義かどうかを確認します。契約時のメールを検索してみてください。<strong>エックスサーバー、さくらインターネット、ロリポップ</strong>などの大手サーバー会社であれば、本人確認の上で管理画面のアクセス情報を再発行してもらえる場合があります。</p>
+
+                <h3>3. 手元にある情報を整理する</h3>
+                <p>以下の情報がないか、メールや書類を確認しましょう。</p>
+
+                <ul>
+                    <li>ドメイン登録時のメール</li>
+                    <li>サーバー契約時のメール</li>
+                    <li>制作会社との契約書・見積書</li>
+                    <li>WordPressなどの管理画面のログイン情報</li>
+                    <li>FTP接続情報</li>
+                </ul>
+
+                <h2>管理権限の移管手順</h2>
+
+                <p>状況に応じた対応は以下の通りです。</p>
+
+                <ul>
+                    <li><strong>ドメインが自社名義の場合</strong>：ドメイン管理会社に連絡し、管理画面のアクセス権を回復。その後、ネームサーバーの変更で新しいサーバーに接続できます</li>
+                    <li><strong>ドメインが制作会社名義の場合</strong>：ドメイン管理会社に事情を説明し、移管手続きを依頼します。法人登記簿や商標登録があると、スムーズに進む場合があります</li>
+                    <li><strong>サーバーにアクセスできない場合</strong>：サイトのデータは後述の方法で救出し、新しいサーバーで再構築するのが最も確実です</li>
+                </ul>
+
+                <h2>サイトデータの救出方法</h2>
+
+                <p>サーバーにアクセスできない場合でも、データを救出する方法はあります。</p>
+
+                <ul>
+                    <li><strong>Googleキャッシュ</strong>：検索結果からキャッシュを確認し、テキスト情報を保存</li>
+                    <li><strong>Internet Archive（Wayback Machine）</strong>：過去のサイトのスナップショットが残っている場合があります</li>
+                    <li><strong>ブラウザからの保存</strong>：現在サイトが表示されているなら、ページをまるごと保存</li>
+                </ul>
+
+                <p>完全なデータ復旧が難しい場合でも、テキストと画像さえ救出できれば、<strong>新しいサイトの制作はスムーズ</strong>に進められます。</p>
+
+                <h2>SAQTの引き継ぎ・リニューアルサービス</h2>
+
+                <p>SAQTでは、制作会社との連絡が取れなくなった方向けの<strong>サイト引き継ぎサービス</strong>を提供しています。</p>
+
+                <ul>
+                    <li><strong>現状調査を無料で実施</strong>：ドメイン・サーバーの状況を調査し、最適な対応をご提案</li>
+                    <li><strong>ドメイン移管のサポート</strong>：技術的な手続きをすべて代行</li>
+                    <li><strong>データ救出＋新サイト制作</strong>：打ち合わせ1回・最短3日で新しいサイトを納品</li>
+                    <li><strong>補助金活用で実質7万円〜</strong></li>
+                </ul>
+
+                <p>同じ問題が二度と起きないよう、SAQTではドメイン・サーバーの管理権限は<strong>すべてお客様名義</strong>でお渡しします。制作会社に依存しない、安心の運用体制を構築します。</p>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-12 bg-brand-light border border-orange-200 rounded-xl p-8 text-center">
+                <p class="text-lg font-bold text-slate-900 mb-2">サイトの引き継ぎ、無料で調査します</p>
+                <p class="text-sm text-slate-600 mb-6">ドメイン・サーバーの状況確認からお任せください</p>
+                <a href="../index.html#contact" class="inline-flex items-center justify-center h-12 px-8 text-base font-medium bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors">
+                    SAQTに相談する
+                </a>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 mt-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 text-center text-sm text-slate-500">
+            <p>&copy; 2026 SAQT（サクッと） - 合同会社FOMUS</p>
+        </div>
+    </footer>
+
+</body>
+</html>
