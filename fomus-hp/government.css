@@ -923,36 +923,14 @@ body {
 
 /* Recommended card — gradient border glow */
 .pricing-card.recommended {
-    border-color: transparent;
-    background-clip: padding-box;
+    border: 2px solid var(--primary);
+    background: #fff;
     position: relative;
 }
 
-/* Gradient border effect via pseudo-element */
-.pricing-card.recommended::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, var(--primary), var(--accent), var(--primary-dark));
-    z-index: -1;
-    transition: all var(--transition);
-}
-
-/* Glow effect */
-.pricing-card.recommended::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, var(--primary), var(--accent), var(--primary-dark));
-    z-index: -2;
-    filter: blur(16px);
-    opacity: 0.25;
-    transition: opacity var(--transition);
-}
-
-.pricing-card.recommended:hover::after { opacity: 0.4; }
+/* Subtle shadow for recommended card */
+.pricing-card.recommended::before { display: none; }
+.pricing-card.recommended::after { display: none; }
 
 .pricing-card.recommended:hover {
     transform: translateY(-8px);
