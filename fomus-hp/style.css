@@ -1073,6 +1073,37 @@ body:not(.has-campaign-bar) .header { top: 0; }
 }
 
 /* ========================================
+   WHY SAQT
+   ======================================== */
+.why-saqt {
+    padding: 140px 0;
+    background: var(--bg-alt);
+    position: relative;
+}
+
+.why-saqt::before {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 2px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.3;
+    position: relative;
+    top: -70px;
+}
+
+@media (max-width: 768px) {
+    .why-saqt { padding: 80px 0; }
+    .why-saqt::before { top: -40px; }
+    .why-saqt table { font-size: 0.78rem; }
+    .why-saqt table th, .why-saqt table td { padding: 8px 10px; }
+    .why-saqt div[style*="grid-template-columns:repeat(3"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ========================================
    STEPS
    ======================================== */
 .steps {
